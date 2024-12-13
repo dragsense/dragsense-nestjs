@@ -1,0 +1,84 @@
+<auth-layout>
+  <div class="social-login mt-4 flex flex-col gap-2">
+    <button
+      pButton
+      size="small"
+      label="Login with Google"
+      icon="pi pi-google"
+      class="google-login-btn"
+    ></button>
+    <button
+      pButton
+      size="small"
+      label="Login with GitHub"
+      icon="pi pi-github"
+      class="github-login-btn"
+    ></button>
+  </div>
+
+  <p-divider align="center" type="dotted">
+    <b><span class="text-muted-color">Or Login</span></b>
+  </p-divider>
+
+
+  <form #loginForm="ngForm" (ngSubmit)="onLogin()">
+    <div class="flex flex-col gap-5">
+      <div class="field flex flex-col gap-2">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          pSize="small"
+          pInputText
+          [(ngModel)]="email"
+          name="email"
+          #_email="ngModel"
+          required
+          email
+        />
+        <p-message
+          *ngIf="_email.invalid && (_email.dirty || _email.touched)"
+          severity="error"
+          variant="simple"
+          size="small"
+          text="Valid email is required."
+        ></p-message>
+      </div>
+
+      <div class="field flex flex-col gap-2">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          pSize="small"
+          pInputText
+          [(ngModel)]="password"
+          name="password"
+          #_password="ngModel"
+          required
+          minlength="6"
+        />
+        <a routerLink="/auth/forgot">Forgot Password?</a>
+        <p-message
+          *ngIf="_password.invalid && (_password.dirty || _password.touched)"
+          severity="error"
+          variant="simple"
+          size="small"
+          text="Password is required (minimum 6 characters)."
+        ></p-message>
+      </div>
+
+      <button
+        pButton
+        label="Login"
+        type="submit"
+        size="small"
+        [disabled]="loginForm.invalid"
+      ></button>
+
+      <div class="">
+        <a routerLink="/auth/register">Create an Account.</a>
+      </div>
+    </div>
+  </form>
+</auth-layout>

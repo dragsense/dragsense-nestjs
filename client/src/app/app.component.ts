@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ThemeService } from './theme.service';
-
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -11,15 +9,7 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'client';
+  constructor() {}
 
-  isDarkMode = false;
-
-  constructor(private themeService: ThemeService) {}
-
-  toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-    const theme = this.isDarkMode ? 'dark' : 'light';
-    this.themeService.switchTheme(theme);
-  }
+ 
 }

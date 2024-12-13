@@ -1,0 +1,28 @@
+
+/* Google Login Button */
+.google-login-btn {
+    background-color: #4285f4; /* Google Blue */
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .google-login-btn:hover {
+    background-color: #3367d6; /* Darker Google Blue */
+    transform: scale(1.05); /* Slight zoom effect */
+    cursor: pointer;
+  }
+  
+  /* GitHub Login Button */
+  .github-login-btn {
+    background-color: #333333; /* GitHub Dark Grey */
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .github-login-btn:hover {
+    background-color: #242424; /* Darker Grey */
+    transform: scale(1.05); /* Slight zoom effect */
+    cursor: pointer;
+  }

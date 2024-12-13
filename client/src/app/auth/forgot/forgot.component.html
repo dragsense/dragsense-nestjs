@@ -1,0 +1,43 @@
+<auth-layout>
+  <p-divider align="center" type="dotted">
+    <b><span class="text-muted-color">Forgot Password</span></b>
+  </p-divider>
+
+  <form #forgotForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="flex flex-col gap-5">
+      <div class="field flex flex-col gap-2">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          pSize="small"
+          pInputText
+          [(ngModel)]="email"
+          name="email"
+          #emailCtrl="ngModel"
+          required
+          email
+        />
+        <p-message
+          *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
+          severity="error"
+          variant="simple"
+          size="small"
+          text="Valid email is required."
+        ></p-message>
+      </div>
+
+      <button
+        pButton
+        label="Send Request"
+        type="submit"
+        size="small"
+        [disabled]="forgotForm.invalid"
+      ></button>
+
+      <div class="">
+        <a routerLink="/auth">Login</a>
+      </div>
+    </div>
+  </form>
+</auth-layout>

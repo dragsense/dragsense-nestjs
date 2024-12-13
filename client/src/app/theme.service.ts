@@ -4,23 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ThemeService {
-  private themeLinkElement: HTMLLinkElement;
+  private isDarkMode = false;
 
-  constructor() {
-    this.themeLinkElement = document.getElementById(
-      'app-theme',
-    ) as HTMLLinkElement;
-    if (!this.themeLinkElement) {
-      this.themeLinkElement = document.createElement('link');
-      this.themeLinkElement.rel = 'stylesheet';
-      this.themeLinkElement.id = 'app-theme';
-      this.themeLinkElement.href = 'dark-theme.css';
-      document.head.appendChild(this.themeLinkElement);
-    }
+  constructor() {}
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+
+    const element = document.querySelector('html');
+    if (element) element.classList.toggle('dragsense-app-dark');
   }
 
-  switchTheme(theme: 'light' | 'dark'): void {
-    const themePath = `${theme}-theme.css`;
-    this.themeLinkElement.href = themePath;
+  getDarkModeStatus(): boolean {
+    return this.isDarkMode;
   }
 }
