@@ -1,0 +1,41 @@
+<nav class="app-navbar">
+  <app-menu>
+    <div
+      ngProjectAs="nav-start"
+      class="app-logo"
+    >
+      <img
+        alt="dragsense-logo"
+        class="inline-block"
+        style="width: 50px"
+        src="images/logo/dragsense-logo.png"
+      />
+      <b class="">DragSense</b>
+    </div>
+
+    <div ngProjectAs="nav-end">
+      <div class="flex items-center space-x-4">
+        <button
+          size="small"
+          pButton
+          aria-label="Switch Theme"
+          (click)="onToggleTheme()"
+          [outlined]="true"
+          severity="secondary"
+          [icon]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'"
+        ></button>
+
+        <div class="card flex justify-center">
+          <p-menu #menu [model]="items" [popup]="true" />
+          <p-button
+            (click)="menu.toggle($event)"
+            icon="pi pi-user"
+            [rounded]="true"
+            size="small"
+          />
+        </div>
+      </div>
+    </div>
+    <p-divider ngProjectAs="nav-divider" styleClass="m-0" />
+  </app-menu>
+</nav>

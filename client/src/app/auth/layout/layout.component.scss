@@ -1,8 +1,11 @@
 .bg-triangle-rotated {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .auth-card-container {
-    width: 400px;
+  min-width: 400px;
 }
 
+.auth-content {
+    min-height: 400px;
+}

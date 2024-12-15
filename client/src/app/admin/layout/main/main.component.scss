@@ -1,0 +1,10 @@
+:host ::ng-deep .p-panel {
+    .p-panel-header, .p-panel-content, .p-panel-footer {
+        padding: 0;
+    }
+
+    .p-panel-header, .p-panel-content {
+        margin-bottom: 0.5rem;
+        border: none;
+    }
+}

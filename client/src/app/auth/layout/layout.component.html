@@ -1,61 +1,67 @@
-<div class="flex justify-evenly items-center h-screen m-10">
-  <div class="self-end">
-    <img src="images/background/bg-triangles.png" alt="bg" />
-  </div>
+<header class="mt-10">
+  <nav class="text-center">
+    <img
+    alt="dragsense-logo"
+      class="inline-block"
+      style="width: 50px"
+      src="images/logo/dragsense-logo.png"
+    />
+    <b>DragSense</b>
+  </nav>
+</header>
 
-  <div class="auth-card-container">
-    <p-card styleClass="p-5">
-      <ng-template pTemplate="header">
-        <div class="text-center">
-          <img
-            alt="logo-img"
-            class="inline-block"
-            style="width: 50px"
-            src="images/logo/dragsense-logo.png"
-          />
-          <b>DragSense</b>
-        </div>
-      </ng-template>
-
-      <div class="p-fluid">
-        <ng-content />
-      </div>
-
-      <ng-template pTemplate="footer">
-        <p-divider align="center"></p-divider>
-
-        <div class="flex space-x-4">
-          <span>Follow Us On: </span>
-          <a
-            *ngFor="let social of socials"
-            [href]="social.url"
-            target="_blank"
-            [attr.aria-label]="social.label"
-          >
-            <i class="pi" [ngClass]="social.iconClasse + ' p-1'"></i>
-          </a>
-        </div>
-      </ng-template>
-    </p-card>
-
-    <div class="mt-2 text-center text-xs text-gray-500">
-      <span>&copy; 2024 DragSense. All Rights Reserved. </span>
-    </div>
-  </div>
-
-  <div class="self-start">
-    <button
-      size="large"
-      pButton
-      class="p-button-rounded p-button-outlined"
-      style="border: none"
-      aria-label="Switch Theme"
-      (click)="onToggleTheme()"
-    >
-      <i class="pi" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
-    </button>
-    <div class="bg-triangle-rotated">
+<main class="my-2">
+  <div class="flex justify-evenly items-center">
+    <div class="self-end">
       <img src="images/background/bg-triangles.png" alt="bg" />
     </div>
+
+    <div class="auth-card-container">
+      <p-card styleClass="p-2">
+        <ng-template pTemplate="header"> </ng-template>
+
+        <div class="p-fluid auth-content">
+          <ng-content />
+        </div>
+
+        <ng-template pTemplate="footer">
+          <p-divider align="center"></p-divider>
+
+          <div class="flex space-x-4">
+            <span>Follow Us On: </span>
+            <a
+              *ngFor="let social of socials"
+              [href]="social.url"
+              target="_blank"
+              [attr.aria-label]="social.label"
+            >
+              <i class="pi" [ngClass]="social.iconClasse + ' p-1'"></i>
+            </a>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+
+    <div class="self-start">
+      <button
+        size="large"
+        pButton
+        class="p-button-rounded p-button-outlined"
+        style="border: none"
+        aria-label="Switch Theme"
+        (click)="onToggleTheme()"
+      >
+        <i class="pi" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
+      </button>
+      <div class="bg-triangle-rotated">
+        <img src="images/background/bg-triangles.png" alt="bg" />
+      </div>
+    </div>
   </div>
-</div>
+</main>
+
+<footer class="mb-10">
+  <p class="text-center text-xs text-gray-500">
+    <span>&copy; 2025 DragSense. All Rights Reserved. </span>
+  </p>
+</footer>

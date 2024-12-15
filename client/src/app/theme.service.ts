@@ -12,7 +12,7 @@ export class ThemeService {
     this.isDarkMode = !this.isDarkMode;
 
     const element = document.querySelector('html');
-    if (element) element.classList.toggle('dragsense-app-dark');
+    if (element) element.classList.toggle('dark');
   }
 
   getDarkModeStatus(): boolean {

@@ -1,0 +1,33 @@
+<app-layout>
+  <ng-container ngProjectAs="panel-header">Projects</ng-container>
+  <ng-container ngProjectAs="panel-content">
+    <p-table
+      [value]="projects"
+      [(selection)]="selectedProject"
+      dataKey="code"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4rem"></th>
+          <th>Id</th>
+          <th>Identifier</th>
+          <th>Name</th>
+          <th>Platform</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-project>
+        <tr>
+          <td>
+            <p-tableRadioButton [value]="project"></p-tableRadioButton>
+          </td>
+          <td>{{ project.id }}</td>
+          <td>{{ project.identifier }}</td>
+          <td>{{ project.name }}</td>
+          <td>{{ project.platform }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+  <ng-container ngProjectAs="panel-footer"></ng-container>
+</app-layout>

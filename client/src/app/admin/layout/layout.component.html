@@ -1,11 +1,28 @@
-<header>
-  <app-nav></app-nav>
-</header>
+<app-header
+  (toggleTheme)="toggleTheme()"
+  (toggleSidebar)="toggleSidebar()"
+></app-header>
 
-<main>
-  <ng-content />
-</main>
 
-<footer>
-  <app-footer></app-footer>
-</footer>
+  <div class="app-content flex items-stretch">
+    <div class="mr-4" *ngIf="isSidebarVisible">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="flex-1">
+      <app-main>
+        <ng-container ngProjectAs="panel-header">
+          <ng-content select="panel-header" />
+        </ng-container>
+
+        <ng-container ngProjectAs="panel-content">
+          <ng-content select="panel-content" />
+        </ng-container>
+        <ng-container ngProjectAs="panel-footer">
+          <ng-content select="panel-footer" />
+        </ng-container>
+      </app-main>
+    </div>
+  </div>
+
+
+<app-footer></app-footer>

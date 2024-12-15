@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LayoutComponent } from '../layout/layout.component';
 import { SharedModule } from '../shared/shared.module';
-import { AuthService } from '../services/auth.service';
 import { User } from '../interfaces/user.interface';
+import { AuthService } from '../auth.service';
+import { RouteService } from '../../routes.service';
+import { AuthType } from '../../types/routes.type';
 
 @Component({
   selector: 'auth-register',
@@ -10,8 +12,10 @@ import { User } from '../interfaces/user.interface';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
-  constructor(private authService: AuthService) {}
+export class RegisterComponent implements OnInit {
+  constructor(private authService: AuthService,
+    private routeService: RouteService,
+  ) {}
 
   user: User = {
     firstname: '',
@@ -21,6 +25,11 @@ export class RegisterComponent {
   };
 
   confirmPassword: string = '';
+  loginPath!: string;
+
+   ngOnInit(): void {
+      this.loginPath = this.routeService.getAuthPath(AuthType.Login);
+    }
 
   onRegister() {
     if (this.user.password !== this.confirmPassword) {

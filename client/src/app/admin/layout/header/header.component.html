@@ -1,0 +1,45 @@
+<header class="app-header">
+  <app-nav
+    [isDarkMode]="isDarkMode"
+    [onToggleTheme]="onToggleTheme.bind(this)"
+  ></app-nav>
+
+    <div class="flex items-center">
+      <div class="project-menu-header py-2 flex items-center">
+        <button
+          size="small"
+          pButton
+          aria-label="Toggle Sidebar"
+          (click)="onToggleSidebar()"
+          [icon]="'pi pi-bars'"
+          class="text-xl mr-2"
+        ></button>
+
+        <p-button
+          size="small"
+          aria-label="Select Project"
+          (onClick)="toggle($event)"
+          label="{{ selectedProject || 'Select Project' }}"
+          styleClass="text-sm w-full"
+          class="flex-1"
+        />
+
+        <p-popover #op>
+          <ul class="list-none p-2">
+            <li
+              *ngFor="let project of projects"
+              class="cursor-pointer p-2 hover:bg-gray-200"
+              (click)="onSelectProject(project)"
+            >
+              {{ project }}
+            </li>
+          </ul>
+        </p-popover>
+      </div>
+
+      <div class="flex-1 pl-4">
+        <app-breadcrum />
+      </div>
+    </div>
+</header>
+

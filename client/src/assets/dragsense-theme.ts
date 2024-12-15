@@ -466,7 +466,7 @@ export const dragsenseTheme =
           hoverMutedColor: '{surface.600}',
         },
         content: {
-          background: '{surface.0}',
+          background: '{surface.50}',
           hoverBackground: '{surface.100}',
           borderColor: '{surface.200}',
           color: '{text.color}',

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutComponent } from '../layout/layout.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth.service';
+import { AuthType } from '../../types/routes.type';
+import { RouteService } from '../../routes.service';
 
 @Component({
   selector: 'app-forgot',
@@ -10,11 +12,17 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './forgot.component.html',
   styleUrl: './forgot.component.scss',
 })
-export class ForgotComponent {
+export class ForgotComponent implements OnInit {
+  constructor(private authService: AuthService,
+    private routeService: RouteService,
+  ) {}
+
   email: string = '';
+  loginPath!: string;
 
-  constructor(private authService: AuthService) {}
-
+  ngOnInit(): void {
+    this.loginPath = this.routeService.getAuthPath(AuthType.Login);
+  }
   onSubmit() {
     this.authService.forgot({ email: this.email }).subscribe(
       (response) => {},

@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: MyPreset,
         options: {
-          darkModeSelector: '.dragsense-app-dark',
+          darkModeSelector: '.dark',
           cssLayer: {
             name: 'primeng',
             order: 'tailwind-base, primeng, tailwind-utilities',

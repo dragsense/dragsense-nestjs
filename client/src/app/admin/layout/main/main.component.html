@@ -1,0 +1,15 @@
+<main class="app-main">
+  <p-scrollpanel [style]="{ width: '100%', height: '75vh' }">
+    <p-panel styleClass="border-none bg-transparent">
+      <ng-template pTemplate="header">
+        <ng-content select="panel-header" />
+      </ng-template>
+
+      <ng-content select="panel-content" />
+
+      <ng-template pTemplate="footer">
+        <ng-content select="panel-footer" />
+      </ng-template>
+    </p-panel>
+  </p-scrollpanel>
+</main>
