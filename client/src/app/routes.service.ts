@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ROUTES } from './config/routes.config';
-import { AuthType, AdminType } from './types/routes.type';
+import {
+  ROUTES,
+  AuthRouteType,
+  AdminRouteType,
+  ProjectRouteType,
+} from './config/routes.config';
 
 @Injectable({
   providedIn: 'root',
@@ -8,33 +12,40 @@ import { AuthType, AdminType } from './types/routes.type';
 export class RouteService {
   readonly ROUTES = ROUTES;
 
-  getAuthPath(type?: AuthType): string {
+  getAuthPath(type?: AuthRouteType): string {
     switch (type) {
-      case AuthType.Login:
-        return `/${ROUTES.auth.base}/${ROUTES.auth.login}`;
-      case AuthType.Register:
+      case AuthRouteType.Login:
+        return `/${ROUTES.auth.base}`;
+      case AuthRouteType.Register:
         return `/${ROUTES.auth.base}/${ROUTES.auth.register}`;
-      case AuthType.Forgot:
+      case AuthRouteType.Forgot:
         return `/${ROUTES.auth.base}/${ROUTES.auth.forgot}`;
-      case AuthType.Reset:
+      case AuthRouteType.Reset:
         return `/${ROUTES.auth.base}/${ROUTES.auth.reset}`;
       default:
         return `/${ROUTES.auth.base}`;
     }
   }
 
-  getAdminPath(type?: AdminType): string {
+  getAdminPath(type?: AdminRouteType): string {
     switch (type) {
-      case AdminType.Dashboard:
-        return `/${ROUTES.admin.base}/${ROUTES.admin.dashboard}`;
-      case AdminType.Projects:
-        return `/${ROUTES.admin.base}/${ROUTES.admin.projects}`;
+      case AdminRouteType.Dashboard:
+        return `/${ROUTES.admin.base}`;
+      case AdminRouteType.Projects:
+        return `/${ROUTES.admin.base}/${ROUTES.admin.projects.base}`;
       default:
         return `/${ROUTES.admin.base}`;
     }
   }
 
-  getDefaultPath(): string {
-    return ROUTES.default.redirectTo;
+  getProjectsPath(type?: ProjectRouteType): string {
+    switch (type) {
+      case ProjectRouteType.List:
+        return `${this.getAdminPath(AdminRouteType.Projects)}`;
+      case ProjectRouteType.Single:
+        return `${this.getAdminPath(AdminRouteType.Projects)}/${ROUTES.admin.projects.single}`;
+      default:
+        return this.getAdminPath(AdminRouteType.Projects);
+    }
   }
 }

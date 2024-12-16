@@ -6,6 +6,7 @@ import { ForgotComponent } from './auth/forgot/forgot.component';
 import { ResetComponent } from './auth/reset/reset.component';
 import { ProjectsComponent } from './admin/projects/projects.component';
 import { ROUTES } from './config/routes.config';
+import { ProjectComponent } from './admin/projects/project/project.component';
 
 const authRoutes: Routes = [
   { path: ROUTES.auth.login, component: LoginComponent },
@@ -15,9 +16,15 @@ const authRoutes: Routes = [
   { path: '', redirectTo: ROUTES.auth.login, pathMatch: 'full' },
 ];
 
+const projectRoutes: Routes = [
+  { path: ROUTES.admin.projects.all, component: ProjectsComponent },
+  { path: ROUTES.admin.projects.single, component: ProjectComponent },
+  { path: '', redirectTo: ROUTES.admin.projects.all, pathMatch: 'full' },
+];
+
 const adminRoutes: Routes = [
   { path: ROUTES.admin.dashboard, component: AdminComponent },
-  { path: ROUTES.admin.projects, component: ProjectsComponent },
+  { path: ROUTES.admin.projects.base, children: projectRoutes },
   { path: '', redirectTo: ROUTES.admin.dashboard, pathMatch: 'full' },
 ];
 
@@ -30,5 +37,5 @@ export const routes: Routes = [
     path: ROUTES.admin.base,
     children: adminRoutes,
   },
-  { path: '', redirectTo: ROUTES.default.redirectTo, pathMatch: 'full' },
+  { path: '', redirectTo: ROUTES.admin.base, pathMatch: 'full' },
 ];

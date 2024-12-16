@@ -4,11 +4,10 @@ import { MenuModule } from 'primeng/menu';
 import { BadgeModule } from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
 import { AvatarModule } from 'primeng/avatar';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'sidebar-menu',
-  imports: [MenuModule, NgFor, BadgeModule, RippleModule, AvatarModule],
+  imports: [MenuModule, BadgeModule, RippleModule, AvatarModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })
@@ -57,6 +56,7 @@ export class MenuComponent implements OnInit {
         icon: 'pi pi-plus',
         shortcut: '⌘+N',
       },
+      
     ];
   }
 }

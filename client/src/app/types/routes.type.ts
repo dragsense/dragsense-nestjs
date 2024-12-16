@@ -1,14 +1,23 @@
-export enum AuthType {
-  Login = 'login',
-  Register = 'register',
-  Forgot = 'forgot',
-  Reset = 'reset',
+export interface SubRoutesType {
+  base: string;
+  all: string;
+  single: string;
 }
 
-export enum AdminType {
-  Dashboard = 'dashboard',
-  Projects = 'projects',
-  Teams = 'teams',
-  Themes = 'themes',
-  Apps = 'apps',
+export interface RoutesType {
+  auth: {
+    base: string;
+    login: string;
+    register: string;
+    forgot: string;
+    reset: string;
+  };
+  admin: {
+    base: string;
+    dashboard: string;
+    projects: SubRoutesType
+    teams: SubRoutesType
+    themes: SubRoutesType
+    apps: SubRoutesType
+  };
 }

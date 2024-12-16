@@ -1,15 +1,16 @@
-<main class="app-main">
-  <p-scrollpanel [style]="{ width: '100%', height: '75vh' }">
-    <p-panel styleClass="border-none bg-transparent">
-      <ng-template pTemplate="header">
-        <ng-content select="panel-header" />
-      </ng-template>
+<main class="app-main h-full">
+  <div class="px-4 flex flex-col items-center h-full">
+    <div class="pb-2 w-full">
+      <ng-content select="main-header" />
+    </div>
 
-      <ng-content select="panel-content" />
+    <div
+      class="p-4 flex-1 w-full rounded bg-surface-50 dark:bg-surface-900 overflow-auto">
+      <ng-content select="main-content" />
+    </div>
 
-      <ng-template pTemplate="footer">
-        <ng-content select="panel-footer" />
-      </ng-template>
-    </p-panel>
-  </p-scrollpanel>
+    <div class="pt-2 w-full">
+      <ng-content select="main-footer" />
+    </div>
+  </div>
 </main>

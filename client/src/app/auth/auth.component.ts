@@ -3,7 +3,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthService } from './auth.service';
 import { RouteService } from '../routes.service';
-import { AuthType } from '../types/routes.type';
+import { AuthRouteType } from '../config/routes.config';
 
 @Component({
   selector: 'auth-login',
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
   forgotPath!: string;
 
   ngOnInit(): void {
-    this.registerPath = this.routeService.getAuthPath(AuthType.Register);
-    this.forgotPath = this.routeService.getAuthPath(AuthType.Forgot);
+    this.registerPath = this.routeService.getAuthPath(AuthRouteType.Register);
+    this.forgotPath = this.routeService.getAuthPath(AuthRouteType.Forgot);
   }
 
   onLogin() {

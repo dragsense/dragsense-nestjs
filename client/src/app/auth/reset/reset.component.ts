@@ -3,7 +3,7 @@ import { LayoutComponent } from '../layout/layout.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '../auth.service';
 import { RouteService } from '../../routes.service';
-import { AuthType } from '../../types/routes.type';
+import { AuthRouteType } from '../../config/routes.config';
 
 @Component({
   selector: 'app-reset',
@@ -21,7 +21,7 @@ export class ResetComponent implements OnInit {
   loginPath!: string;
 
   ngOnInit(): void {
-    this.loginPath = this.routeService.getAuthPath(AuthType.Login);
+    this.loginPath = this.routeService.getAuthPath(AuthRouteType.Login);
   }
 
   onReset() {

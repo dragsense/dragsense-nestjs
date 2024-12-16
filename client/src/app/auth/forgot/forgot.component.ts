@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutComponent } from '../layout/layout.component';
 import { AuthService } from '../auth.service';
-import { AuthType } from '../../types/routes.type';
 import { RouteService } from '../../routes.service';
+import { AuthRouteType } from '../../config/routes.config';
 
 @Component({
   selector: 'app-forgot',
@@ -21,7 +21,7 @@ export class ForgotComponent implements OnInit {
   loginPath!: string;
 
   ngOnInit(): void {
-    this.loginPath = this.routeService.getAuthPath(AuthType.Login);
+    this.loginPath = this.routeService.getAuthPath(AuthRouteType.Login);
   }
   onSubmit() {
     this.authService.forgot({ email: this.email }).subscribe(

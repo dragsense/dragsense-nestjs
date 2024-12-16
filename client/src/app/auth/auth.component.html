@@ -31,12 +31,12 @@
           pInputText
           [(ngModel)]="email"
           name="email"
-          #_email="ngModel"
+          #emailCtrl="ngModel"
           required
           email
         />
         <p-message
-          *ngIf="_email.invalid && (_email.dirty || _email.touched)"
+          *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
           severity="error"
           variant="simple"
           size="small"
@@ -53,13 +53,13 @@
           pInputText
           [(ngModel)]="password"
           name="password"
-          #_password="ngModel"
+          #passwordCtrl="ngModel"
           required
           minlength="6"
         />
         <a [routerLink]="forgotPath">Forgot Password?</a>
         <p-message
-          *ngIf="_password.invalid && (_password.dirty || _password.touched)"
+          *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)"
           severity="error"
           variant="simple"
           size="small"

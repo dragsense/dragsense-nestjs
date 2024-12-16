@@ -4,7 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { User } from '../interfaces/user.interface';
 import { AuthService } from '../auth.service';
 import { RouteService } from '../../routes.service';
-import { AuthType } from '../../types/routes.type';
+import { AuthRouteType } from '../../config/routes.config';
 
 @Component({
   selector: 'auth-register',
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   loginPath!: string;
 
    ngOnInit(): void {
-      this.loginPath = this.routeService.getAuthPath(AuthType.Login);
+      this.loginPath = this.routeService.getAuthPath(AuthRouteType.Login);
     }
 
   onRegister() {
