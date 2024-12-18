@@ -7,23 +7,27 @@ import { ThemeService } from '../../theme.service';
 import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-layout',
-  imports: [HeaderComponent, NgIf, SidebarComponent, MainComponent, FooterComponent],
+  selector: 'admin-layout',
+  imports: [
+    HeaderComponent,
+    SidebarComponent,
+    MainComponent,
+    FooterComponent,
+    NgIf
+  ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
 export class LayoutComponent implements OnInit {
+  @Input() activeComponent: any;
 
   isSidebarVisible: boolean = true;
   isDarkMode: boolean = false;
 
-  constructor(private themeService: ThemeService) {
-
-  }
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
     this.isDarkMode = this.themeService.getDarkModeStatus();
-    
   }
 
   toggleSidebar() {
@@ -34,5 +38,4 @@ export class LayoutComponent implements OnInit {
     this.themeService.toggleDarkMode();
     this.isDarkMode = this.themeService.getDarkModeStatus();
   }
-
 }

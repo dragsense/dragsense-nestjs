@@ -1,18 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutComponent } from '../layout/layout.component';
-import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '../auth.service';
 import { RouteService } from '../../routes.service';
 import { AuthRouteType } from '../../config/routes.config';
+import { RouterLink } from '@angular/router';
+import { Message } from 'primeng/message';
+import { FormsModule } from '@angular/forms';
+import { Divider } from 'primeng/divider';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-reset',
-  imports: [SharedModule, LayoutComponent],
+  imports: [
+    RouterLink,
+    Message,
+    FormsModule,
+    Divider,
+    InputTextModule,
+    ButtonModule,
+    NgIf
+  ],
   templateUrl: './reset.component.html',
   styleUrl: './reset.component.scss',
 })
 export class ResetComponent implements OnInit {
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private routeService: RouteService,
   ) {}
 
@@ -25,7 +39,6 @@ export class ResetComponent implements OnInit {
   }
 
   onReset() {
-
     if (this.password !== this.confirmPassword) {
       alert('Passwords do not match.');
       return;

@@ -1,31 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ProjectService } from './project.service';
-import { PlatformType, Project } from './interfaces/project.interface';
-import { LayoutComponent } from '../layout/layout.component';
+import { PlatformType } from './interfaces/project.interface';
 import { ButtonModule } from 'primeng/button';
 import { TableComponent } from '../layout/table/table.component';
 import { PaginatorComponent } from '../layout/paginator/paginator.component';
 import { RouteService } from '../../routes.service';
 import { Router, RouterLink } from '@angular/router';
 import { Action, Column } from '../layout/table/interfaces/table.interface';
-import { ProjectRouteType } from '../../config/routes.config';
+import { ProjectsRouteType } from '../../config/routes.config';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-projects',
-  imports: [
-    ButtonModule,
-    RouterLink,
-    LayoutComponent,
-    TableComponent,
-    PaginatorComponent,
-  ],
+  imports: [ButtonModule, RouterLink, TableComponent, PaginatorComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
   providers: [ProjectService],
 })
 export class ProjectsComponent implements OnInit {
-  projects!: Partial<Project>[];
+  @ViewChild('headerTemplate') headerTemplate!: TemplateRef<any>;
+  @ViewChild('footerTemplate') footerTemplate!: TemplateRef<any>;
+
+  projects!: any[];
   projectPath!: string;
+  singlePath!: string;
 
   columns!: Column[];
   actions!: Action[];
@@ -34,21 +32,31 @@ export class ProjectsComponent implements OnInit {
     private projectService: ProjectService,
     private routeService: RouteService,
     private router: Router,
-  ) {
+    private adminService: AdminService,
+  ) {}
+
+  ngOnInit() {
+    this.singlePath = this.routeService.getProjectsPath(
+      ProjectsRouteType.Single,
+    );
+
+    this.projectPath = this.routeService.getProjectPath();
+
     this.columns = [
       { field: 'id', header: 'Id' },
-      { field: 'identifier', header: 'Identifier' },
+      {
+        field: 'identifier',
+        header: 'Identifier',
+        class: 'cursor-pointer no-underline hover:underline',
+        onClick: (project: any) => {
+          this.adminService.onSelectProject(project, () => {
+            this.router.navigate([`${this.projectPath}`]);
+          });
+        },
+      },
       { field: 'name', header: 'Name' },
       { field: 'platform', header: 'Platform' },
     ];
-  }
-
-  ngOnInit() {
-    this.projectPath = this.routeService.getProjectsPath(
-      ProjectRouteType.Single,
-    );
-
-    console.log(this.projectPath);
 
     this.actions = [
       {
@@ -56,8 +64,9 @@ export class ProjectsComponent implements OnInit {
           icon: 'pi pi-pencil',
           severity: 'secondary',
           size: 'small',
+          text: true,
         },
-        callback: (row: any) => this.onEditProject(row),
+        onClick: (row: any) => this.onEditProject(row),
       },
       {
         button: {
@@ -66,7 +75,7 @@ export class ProjectsComponent implements OnInit {
           size: 'small',
           text: true,
         },
-        callback: (row: any) => this.onDeleteProject(row),
+        onClick: (row: any) => this.onDeleteProject(row),
       },
     ];
 
@@ -97,9 +106,9 @@ export class ProjectsComponent implements OnInit {
     );
   }
 
-  onEditProject(project: Project) {
-    this.router.navigate([`${this.projectPath}`, { id: project.id }]);
+  onEditProject(project: any) {
+    this.router.navigate([`${this.singlePath}`, { id: project.id }]);
   }
 
-  onDeleteProject(project: Project) {}
+  onDeleteProject(project: any) {}
 }

@@ -1,29 +1,51 @@
-<p-table [value]="data" dataKey="code" styleClass="p-datatable-lg">
+<p-table
+  [value]="data"
+  [selectionMode]="selectedMode"
+  (selectionChange)="onSelectionChange($event)"
+  dataKey="id"
+  [styleClass]="styleClass"
+>
   <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let col of columns">
         {{ col.header }}
       </th>
-      <th>
-        Actions
-      </th>
+      <th *ngIf="actions.length">Actions</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-row>
-    <tr>
-      <td *ngFor="let col of columns">
-        {{ row[col.field] }}
+  <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="row" [pSelectableRowIndex]="rowIndex">
+      <td *ngFor="let col of columns" [class]="col.class">
+        <ng-container *ngIf="col.isRoutable; else clickableCell">
+          <ng-container *ngIf="col.isExternalLink; else internalLink">
+            <a [href]="row[col.url]" target="_blank" rel="noopener noreferrer">
+              {{ row[col.field] }}
+            </a>
+          </ng-container>
+          <ng-template #internalLink>
+            <a [routerLink]="[row[col.url]]">
+              {{ row[col.field] }}
+            </a>
+          </ng-template>
+        </ng-container>
+        <ng-template #clickableCell>
+          <span
+            (click)="col.onClick && !selectedMode ? col.onClick(row) : null"
+          >
+            {{ row[col.field] }}
+          </span>
+        </ng-template>
       </td>
-      <td>
+      <td *ngIf="actions.length">
         <p-button
           *ngFor="let action of actions"
           [icon]="action.button.icon"
           [label]="action.button.label"
           [severity]="action.button.severity"
           [variant]="action.button.variant"
-          [text]="action.button.text" 
-          [size]="action.button.size" 
-          (onClick)="onActionClick(action.callback, row)"
+          [text]="action.button.text"
+          [size]="action.button.size"
+          (onClick)="action.onClick(row)"
           [ariaLabel]="action.button.label"
           [outlined]="action.button.outlined"
           styleClass="mr-2"

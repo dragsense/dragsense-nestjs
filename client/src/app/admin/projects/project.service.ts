@@ -7,7 +7,11 @@ import { API } from '../../config/api.config';
   providedIn: 'root',
 })
 export class ProjectService {
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  
+  }
+
 
   getAll(): Observable<any> {
     return this.http.get(`${API.projects.list}`);

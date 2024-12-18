@@ -1,38 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LayoutComponent } from './layout/layout.component';
-import { SharedModule } from './shared/shared.module';
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from './auth.service';
-import { RouteService } from '../routes.service';
-import { AuthRouteType } from '../config/routes.config';
 
 @Component({
-  selector: 'auth-login',
-  imports: [SharedModule, LayoutComponent],
+  selector: 'app-auth',
+  imports: [RouterOutlet, LayoutComponent],
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
+  providers: [AuthService]
 })
-export class LoginComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private routeService: RouteService,
-  ) {}
-
-  email: string = '';
-  password: string = '';
-  registerPath!: string;
-  forgotPath!: string;
-
-  ngOnInit(): void {
-    this.registerPath = this.routeService.getAuthPath(AuthRouteType.Register);
-    this.forgotPath = this.routeService.getAuthPath(AuthRouteType.Forgot);
-  }
-
-  onLogin() {
-    this.authService
-      .auth({ email: this.email, password: this.password })
-      .subscribe(
-        (response) => {},
-        (error) => {},
-      );
-  }
-}
+export class AuthComponent {}

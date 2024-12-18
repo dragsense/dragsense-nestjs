@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { MenuComponent } from './menu/menu.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [SharedModule, ButtonModule, MenuComponent],
+  imports: [ButtonModule, MenuComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })

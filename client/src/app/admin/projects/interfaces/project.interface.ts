@@ -3,10 +3,10 @@ export enum PlatformType {
   Laravel = 'laravel',
 }
 
-
 export interface Project {
   id: number;
   identifier: string;
+  apiKey: string;
   name: string;
   desc: string;
   domain: string;

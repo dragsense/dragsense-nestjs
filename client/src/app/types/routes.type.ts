@@ -15,9 +15,21 @@ export interface RoutesType {
   admin: {
     base: string;
     dashboard: string;
-    projects: SubRoutesType
-    teams: SubRoutesType
-    themes: SubRoutesType
-    apps: SubRoutesType
+    project: {
+      base: string;
+      overview: string;
+      pages: SubRoutesType;
+      components: SubRoutesType;
+      collections: SubRoutesType;
+      forms: SubRoutesType;
+      media: string;
+      code: string;
+      styles: string;
+      settings: string;
+    };
+    projects: SubRoutesType;
+    teams: SubRoutesType;
+    themes: SubRoutesType;
+    apps: SubRoutesType;
   };
 }

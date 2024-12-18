@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { LayoutComponent } from '../layout/layout.component';
 import { AuthService } from '../auth.service';
 import { RouteService } from '../../routes.service';
 import { AuthRouteType } from '../../config/routes.config';
+import { RouterLink } from '@angular/router';
+import { Message } from 'primeng/message';
+import { FormsModule } from '@angular/forms';
+import { Divider } from 'primeng/divider';
+import { InputTextModule } from 'primeng/inputtext';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-forgot',
-  imports: [SharedModule, LayoutComponent],
+  imports: [RouterLink, Message, FormsModule, Divider, InputTextModule, NgIf, ButtonModule],
   providers: [AuthService],
   templateUrl: './forgot.component.html',
   styleUrl: './forgot.component.scss',

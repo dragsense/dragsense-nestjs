@@ -4,10 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from './interfaces/user.interface';
 import { API } from '../config/api.config';
 
-@Injectable({
-  providedIn: 'root',
-})
-
+@Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
 

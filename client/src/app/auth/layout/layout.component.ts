@@ -5,6 +5,7 @@ import { ThemeService } from '../../theme.service';
 import { NgClass, NgFor } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'auth-layout',
@@ -18,7 +19,7 @@ import { SplitterModule } from 'primeng/splitter';
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
-  providers: [],
+  providers: [AuthService],
 })
 export class LayoutComponent implements OnInit {
   isDarkMode: boolean = false;

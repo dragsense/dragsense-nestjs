@@ -4,6 +4,7 @@ import {
   AuthRouteType,
   AdminRouteType,
   ProjectRouteType,
+  ProjectsRouteType,
 } from './config/routes.config';
 
 @Injectable({
@@ -13,39 +14,84 @@ export class RouteService {
   readonly ROUTES = ROUTES;
 
   getAuthPath(type?: AuthRouteType): string {
+    const authase = ROUTES.auth;
+
     switch (type) {
       case AuthRouteType.Login:
-        return `/${ROUTES.auth.base}`;
+        return `/${authase.base}`;
       case AuthRouteType.Register:
-        return `/${ROUTES.auth.base}/${ROUTES.auth.register}`;
+        return `/${authase.base}/${authase.register}`;
       case AuthRouteType.Forgot:
-        return `/${ROUTES.auth.base}/${ROUTES.auth.forgot}`;
+        return `/${authase.base}/${authase.forgot}`;
       case AuthRouteType.Reset:
-        return `/${ROUTES.auth.base}/${ROUTES.auth.reset}`;
+        return `/${authase.base}/${authase.reset}`;
       default:
-        return `/${ROUTES.auth.base}`;
+        return `/${authase.base}`;
     }
   }
 
   getAdminPath(type?: AdminRouteType): string {
+    const adminBase = ROUTES.admin;
+
     switch (type) {
       case AdminRouteType.Dashboard:
-        return `/${ROUTES.admin.base}`;
+        return `/${adminBase.base}`;
       case AdminRouteType.Projects:
-        return `/${ROUTES.admin.base}/${ROUTES.admin.projects.base}`;
+        return `/${adminBase.base}/${adminBase.projects.base}`;
+      case AdminRouteType.Project:
+        return `/${adminBase.base}/${adminBase.project.base}`;
       default:
-        return `/${ROUTES.admin.base}`;
+        return `/${adminBase.base}`;
     }
   }
 
-  getProjectsPath(type?: ProjectRouteType): string {
+  getProjectsPath(type?: ProjectsRouteType): string {
+    const projectsPath = this.getAdminPath(AdminRouteType.Projects);
+    const projectsBase = ROUTES.admin.projects;
+
     switch (type) {
-      case ProjectRouteType.List:
-        return `${this.getAdminPath(AdminRouteType.Projects)}`;
-      case ProjectRouteType.Single:
-        return `${this.getAdminPath(AdminRouteType.Projects)}/${ROUTES.admin.projects.single}`;
+      case ProjectsRouteType.List:
+        return `${projectsPath}`;
+      case ProjectsRouteType.Single:
+        return `${projectsPath}/${projectsBase.single}`;
       default:
-        return this.getAdminPath(AdminRouteType.Projects);
+        return projectsPath;
+    }
+  }
+
+  getProjectPath(type?: ProjectRouteType): string {
+    const projectPath = this.getAdminPath(AdminRouteType.Project);
+    const projectBase = ROUTES.admin.project;
+
+    switch (type) {
+      case ProjectRouteType.Overview:
+        return `${projectPath}`;
+      case ProjectRouteType.PageList:
+        return `${projectPath}/${projectBase.pages.base}`;
+      case ProjectRouteType.PageSingle:
+        return `${projectPath}/${projectBase.pages.single}`;
+      case ProjectRouteType.ComponentList:
+        return `${projectPath}/${projectBase.components.base}`;
+      case ProjectRouteType.ComponentSingle:
+        return `${projectPath}/${projectBase.components.single}`;
+      case ProjectRouteType.CollectionList:
+        return `${projectPath}/${projectBase.collections.base}`;
+      case ProjectRouteType.CollectionSingle:
+        return `${projectPath}/${projectBase.collections.single}`;
+      case ProjectRouteType.FormList:
+        return `${projectPath}/${projectBase.forms.base}`;
+      case ProjectRouteType.FormSingle:
+        return `${projectPath}/${projectBase.forms.single}`;
+      case ProjectRouteType.Media:
+        return `${projectPath}/${projectBase.media}`;
+      case ProjectRouteType.Code:
+        return `${projectPath}/${projectBase.code}`;
+      case ProjectRouteType.Styles:
+        return `${projectPath}/${projectBase.styles}`;
+      case ProjectRouteType.Settings:
+        return `${projectPath}/${projectBase.settings}`;
+      default:
+        return projectPath;
     }
   }
 }

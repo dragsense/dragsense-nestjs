@@ -13,17 +13,8 @@
     <app-sidebar></app-sidebar>
   </div>
   <div class="flex-1">
-    <app-main>
-      <ng-container ngProjectAs="main-header">
-        <ng-content select="header" />
-      </ng-container>
-
-      <ng-container ngProjectAs="main-content">
-        <ng-content select="content" />
-      </ng-container>
-      <ng-container ngProjectAs="main-footer">
-        <ng-content select="footer" />
-      </ng-container>
+    <app-main [activeComponent]="activeComponent">
+      <ng-content />
     </app-main>
   </div>
 </div>

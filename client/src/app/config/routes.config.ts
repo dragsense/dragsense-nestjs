@@ -16,6 +16,34 @@ export const ROUTES: RoutesType = {
       all: 'list',
       single: 'project',
     },
+    project: {
+      base: 'project',
+      overview: 'overview',
+      pages: {
+        base: 'pages',
+        all: 'list',
+        single: 'page',
+      },
+      components: {
+        base: 'components',
+        all: 'list',
+        single: 'component',
+      },
+      collections: {
+        base: 'collections',
+        all: 'list',
+        single: 'collection',
+      },
+      forms: {
+        base: 'forms',
+        all: 'list',
+        single: 'form',
+      },
+      media: 'media',
+      code: 'code',
+      styles: 'styles',
+      settings: 'settings',
+    },
     teams: {
       base: 'teams',
       all: 'list',
@@ -31,10 +59,8 @@ export const ROUTES: RoutesType = {
       all: 'list',
       single: 'app',
     },
-  }
+  },
 };
-
-
 
 export enum AuthRouteType {
   Login = 'login',
@@ -46,14 +72,34 @@ export enum AuthRouteType {
 export enum AdminRouteType {
   Dashboard = 'dashboard',
   Projects = 'projects',
+  Project = 'project',
   Teams = 'teams',
   Themes = 'themes',
   Apps = 'apps',
 }
 
-
-export enum ProjectRouteType {
+export enum ProjectsRouteType {
   List = 'projects',
   Single = 'project',
-  
+}
+
+export enum ProjectRouteType {
+  Overview = 'overview',
+
+  PageList = 'pages',
+  PageSingle = 'page',
+
+  ComponentList = 'components',
+  ComponentSingle = 'component',
+
+  CollectionList = 'collections',
+  CollectionSingle = 'collection',
+
+  FormList = 'forms',
+  FormSingle = 'form',
+
+  Media = 'media',
+  Code = 'code',
+  Styles = 'styles',
+  Settings = 'settings',
 }

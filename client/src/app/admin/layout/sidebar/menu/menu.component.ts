@@ -1,62 +1,67 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenuModule } from 'primeng/menu';
-import { BadgeModule } from 'primeng/badge';
-import { RippleModule } from 'primeng/ripple';
-import { AvatarModule } from 'primeng/avatar';
+import { RouteService } from '../../../../routes.service';
+import { ProjectRouteType } from '../../../../config/routes.config';
 
 @Component({
   selector: 'sidebar-menu',
-  imports: [MenuModule, BadgeModule, RippleModule, AvatarModule],
+  imports: [MenuModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })
 export class MenuComponent implements OnInit {
   items: MenuItem[] | undefined;
 
+  constructor(private routerService: RouteService) {}
+
   ngOnInit() {
     this.items = [
       {
         label: 'Overview',
         icon: 'pi pi-plus',
-        shortcut: '⌘+N',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.Overview),
       },
       {
         label: 'Pages',
         icon: 'pi pi-plus',
-        shortcut: '⌘+N',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.PageList),
       },
       {
         label: 'Components',
         icon: 'pi pi-plus',
-        shortcut: '⌘+N',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.ComponentList),
       },
       {
         label: 'Collections',
         icon: 'pi pi-plus',
-        shortcut: '⌘+N',
-      },
-      {
-        label: 'Media',
-        icon: 'pi pi-plus',
-        shortcut: '⌘+N',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.CollectionList),
       },
       {
         label: 'Forms',
         icon: 'pi pi-plus',
-        shortcut: '⌘+N',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.FormList),
+      },
+      {
+        label: 'Media',
+        icon: 'pi pi-plus',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.Media),
+      },
+      {
+        label: 'Code',
+        icon: 'pi pi-plus',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.Code),
       },
       {
         label: 'Styles',
         icon: 'pi pi-plus',
-        shortcut: '⌘+N',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.Styles),
       },
       {
         label: 'Settings',
         icon: 'pi pi-plus',
-        shortcut: '⌘+N',
+        routerLink: this.routerService.getProjectPath(ProjectRouteType.Settings),
       },
-      
     ];
   }
 }
