@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API } from '../../config/api.config';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ProjectService {
 
   constructor(private http: HttpClient) {

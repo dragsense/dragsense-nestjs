@@ -69,7 +69,7 @@ export class RouteService {
       case ProjectRouteType.PageList:
         return `${projectPath}/${projectBase.pages.base}`;
       case ProjectRouteType.PageSingle:
-        return `${projectPath}/${projectBase.pages.single}`;
+        return `${projectPath}/${projectBase.pages.base}/${projectBase.pages.single}`;
       case ProjectRouteType.ComponentList:
         return `${projectPath}/${projectBase.components.base}`;
       case ProjectRouteType.ComponentSingle:

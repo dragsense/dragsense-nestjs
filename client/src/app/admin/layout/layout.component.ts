@@ -11,7 +11,6 @@ import { NgIf } from '@angular/common';
   imports: [
     HeaderComponent,
     SidebarComponent,
-    MainComponent,
     FooterComponent,
     NgIf
   ],
@@ -19,7 +18,6 @@ import { NgIf } from '@angular/common';
   styleUrl: './layout.component.scss',
 })
 export class LayoutComponent implements OnInit {
-  @Input() activeComponent: any;
 
   isSidebarVisible: boolean = true;
   isDarkMode: boolean = false;

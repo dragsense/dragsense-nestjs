@@ -18,6 +18,7 @@ import { TableComponent } from '../table/table.component';
 import { RouteService } from '../../../routes.service';
 import { Router } from '@angular/router';
 import { AdminService } from '../../admin.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -28,9 +29,12 @@ import { AdminService } from '../../admin.service';
     ButtonModule,
     PopoverModule,
     TableComponent,
+    NgClass,
+    NgIf
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  providers: [ProjectService]
 })
 export class HeaderComponent {
   @ViewChild('op') op!: Popover;
@@ -54,12 +58,11 @@ export class HeaderComponent {
   ngOnInit() {
     this.projectPath = this.routeService.getProjectPath();
 
-
-      this.columns = [
-          { field: 'id', header: 'Id' },
-          { field: 'identifier', header: 'Identifier' },
-          { field: 'name', header: 'Name' },
-        ];
+    this.columns = [
+      { field: 'id', header: 'Id' },
+      { field: 'identifier', header: 'Identifier' },
+      { field: 'name', header: 'Name' },
+    ];
 
     this.adminService.project$.subscribe((project) => {
       this.selectedProject = project;
@@ -83,16 +86,21 @@ export class HeaderComponent {
           id: 0,
           identifier: 'project1',
           name: 'My Project 1',
+          desc: 'My Project 1',
+          connected: true
         },
         {
           id: 1,
           identifier: 'project2',
           name: 'My Project 2',
+          desc: 'My Project 2',
+          connected: true
         },
         {
           id: 2,
           identifier: 'project3',
           name: 'My Project 3',
+          desc: 'My Project 3',
         },
       ];
       /*

@@ -3,7 +3,7 @@
   [selectionMode]="selectedMode"
   (selectionChange)="onSelectionChange($event)"
   dataKey="id"
-  [styleClass]="styleClass"
+  [styleClass]="getDynamicClass()"
 >
   <ng-template pTemplate="header">
     <tr>
@@ -15,7 +15,11 @@
   </ng-template>
   <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
     <tr [pSelectableRow]="row" [pSelectableRowIndex]="rowIndex">
-      <td *ngFor="let col of columns" [class]="col.class">
+      <td
+        *ngFor="let col of columns"
+
+        [ngClass]="col.class"
+      >
         <ng-container *ngIf="col.isRoutable; else clickableCell">
           <ng-container *ngIf="col.isExternalLink; else internalLink">
             <a [href]="row[col.url]" target="_blank" rel="noopener noreferrer">

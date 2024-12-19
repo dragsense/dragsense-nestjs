@@ -23,10 +23,10 @@ import { Select } from 'primeng/select';
     Select,
     NgIf
   ],
-  templateUrl: './project.component.html',
-  styleUrl: './project.component.scss',
+  templateUrl: './single.component.html',
+  styleUrl: './single.component.scss',
 })
-export class ProjectComponent {
+export class SingleComponent {
 
 
     @ViewChild('headerTemplate') headerTemplate!: TemplateRef<any>;

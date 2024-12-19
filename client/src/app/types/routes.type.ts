@@ -1,6 +1,6 @@
 export interface SubRoutesType {
   base: string;
-  all: string;
+  list: string;
   single: string;
 }
 

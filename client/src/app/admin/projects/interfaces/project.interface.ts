@@ -13,4 +13,5 @@ export interface Project {
   apiPrefix: string;
   apiVersion: string;
   platform: PlatformType.NodeJS | PlatformType.Laravel;
+  connected: boolean
 }

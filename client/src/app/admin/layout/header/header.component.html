@@ -18,19 +18,32 @@
         size="small"
         aria-label="Select Project"
         (onClick)="onPopoverOpen($event)"
-        label="{{ selectedProject?.name || 'Select Project' }}"
-        styleClass="flex-1 text-sm w-full"
+        styleClass="flex items-center w-full"
         class="flex-1"
-      />
+      >
+    
+          <span class="flex items-center">
+            <strong class="text-bold">{{ selectedProject?.name || 'Select Project' }}</strong>
+            <span
+              *ngIf="selectedProject"
+              [ngClass]="{
+                'bg-green-500': selectedProject?.connected,
+                'bg-red-500': !selectedProject?.connected,
+              }"
+              class="ml-2 w-2 h-2 rounded-full"
+            ></span>
+          </span>
+     
+      </p-button>
 
-      <p-popover #op>      
+      <p-popover #op>
         <app-table
-        [data]="projects"
-        [columns]="columns"
-        [styleClass]="'p-datatable-lg'"
-        (selectionChange)="onSelectProject($event)"
-        [selectedMode]="'single'"
-      />
+          [data]="projects"
+          [columns]="columns"
+          [styleClass]="'p-datatable-lg'"
+          (selectionChange)="onSelectProject($event)"
+          [selectedMode]="'single'"
+        />
       </p-popover>
     </div>
 

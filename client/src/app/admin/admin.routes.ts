@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { ROUTES } from '../config/routes.config';
 import { projectRoutes } from './project/project.routes';
+import { projectsRoutes } from './projects/projects.routes';
 
 export const adminRoutes: Routes = [
   {
@@ -13,23 +14,9 @@ export const adminRoutes: Routes = [
   { path: ROUTES.admin.project.base, children: projectRoutes },
   {
     path: ROUTES.admin.projects.base,
-    children: [
-      {
-        path: ROUTES.admin.projects.all,
-        loadComponent: () =>
-          import('./projects/projects.component').then(
-            (m) => m.ProjectsComponent,
-          ),
-      },
-      {
-        path: ROUTES.admin.projects.single,
-        loadComponent: () =>
-          import('./projects/project/project.component').then(
-            (m) => m.ProjectComponent,
-          ),
-      },
-      { path: '', redirectTo: ROUTES.admin.projects.all, pathMatch: 'full' },
-    ],
+    loadComponent: () =>
+      import('./projects/projects.component').then((m) => m.ProjectsComponent),
+    children: projectsRoutes,
   },
   { path: '', redirectTo: ROUTES.admin.dashboard, pathMatch: 'full' },
 ];

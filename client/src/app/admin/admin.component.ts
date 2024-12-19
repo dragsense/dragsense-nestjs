@@ -11,10 +11,5 @@ import { AdminService } from './admin.service';
   providers: [AdminService],
 })
 export class AdminComponent {
-  activeComponent: any;
-  onRouteActivate(component: any) {
-    setTimeout(() => {
-      this.activeComponent = component;
-    });
-  }
+
 }

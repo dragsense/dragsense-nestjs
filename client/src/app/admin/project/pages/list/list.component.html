@@ -1,0 +1,31 @@
+<ng-template #headerTemplate>
+    <div class="flex justify-between items-center w-full">
+      <span class="">Pages</span>
+      <p-button
+        type="secondary"
+        [outlined]="true"
+        severity="secondary"
+        size="small"
+        label="Add New"
+        icon="pi pi-plus"
+        [routerLink]="singlePath"
+      />
+    </div>
+  </ng-template>
+  
+  
+  <ng-template #footerTemplate>
+    <app-paginator
+      [rows]="10"
+      [total]="pages.length"
+      [first]="0"
+      [styleClass]="'p-0 bg-transparent'"
+  /></ng-template>
+  
+  <app-table
+    [data]="pages"
+    [columns]="columns"
+    [styleClass]="'p-datatable-lg'"
+    [actions]="actions"
+  />
+  

@@ -26,10 +26,12 @@ export class LoginComponent implements OnInit {
   password: string = '';
   registerPath!: string;
   forgotPath!: string;
+  adminPath!: string;
 
   ngOnInit(): void {
     this.registerPath = this.routeService.getAuthPath(AuthRouteType.Register);
     this.forgotPath = this.routeService.getAuthPath(AuthRouteType.Forgot);
+    this.adminPath = this.routeService.getAdminPath();
   }
 
   onLogin() {

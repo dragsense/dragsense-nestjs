@@ -13,30 +13,30 @@ export const ROUTES: RoutesType = {
     dashboard: 'dashboard',
     projects: {
       base: 'projects',
-      all: 'list',
-      single: 'project',
+      list: 'list',
+      single: 'single',
     },
     project: {
       base: 'project',
       overview: 'overview',
       pages: {
         base: 'pages',
-        all: 'list',
-        single: 'page',
+        list: 'list',
+        single: 'single',
       },
       components: {
         base: 'components',
-        all: 'list',
+        list: 'list',
         single: 'component',
       },
       collections: {
         base: 'collections',
-        all: 'list',
+        list: 'list',
         single: 'collection',
       },
       forms: {
         base: 'forms',
-        all: 'list',
+        list: 'list',
         single: 'form',
       },
       media: 'media',
@@ -46,17 +46,17 @@ export const ROUTES: RoutesType = {
     },
     teams: {
       base: 'teams',
-      all: 'list',
+      list: 'list',
       single: 'team',
     },
     themes: {
       base: 'themes',
-      all: 'list',
+      list: 'list',
       single: 'theme',
     },
     apps: {
       base: 'apps',
-      all: 'list',
+      list: 'list',
       single: 'app',
     },
   },
@@ -80,14 +80,14 @@ export enum AdminRouteType {
 
 export enum ProjectsRouteType {
   List = 'projects',
-  Single = 'project',
+  Single = 'single',
 }
 
 export enum ProjectRouteType {
   Overview = 'overview',
 
   PageList = 'pages',
-  PageSingle = 'page',
+  PageSingle = 'single',
 
   ComponentList = 'components',
   ComponentSingle = 'component',
