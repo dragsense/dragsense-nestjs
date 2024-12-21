@@ -4,15 +4,14 @@ import { PageService } from '../page.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { RouteService } from '../../../../routes.service';
 import { ProjectRouteType } from '../../../../config/routes.config';
-import { ButtonModule } from 'primeng/button';
-import { Message } from 'primeng/message';
+
 import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
 import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'project-page',
-  imports: [RouterLink, InputTextModule, NgIf, ButtonModule, Message, FormsModule],
+  imports: [RouterLink, NgIf, FormsModule],
   templateUrl: './single.component.html',
   styleUrl: './single.component.scss',
 })
@@ -23,6 +22,7 @@ export class SingleComponent {
   page: Partial<Page> = {
     name: '',
     slug: '',
+    content: ''
   };
 
   pagesPath!: string;

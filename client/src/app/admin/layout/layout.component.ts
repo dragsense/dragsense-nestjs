@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { MainComponent } from './main/main.component';
 import { HeaderComponent } from './header/header.component';
 import { ThemeService } from '../../theme.service';
 import { NgIf } from '@angular/common';

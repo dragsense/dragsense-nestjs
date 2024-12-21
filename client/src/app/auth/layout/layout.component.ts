@@ -1,21 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { CardModule } from 'primeng/card';
-import { DividerModule } from 'primeng/divider';
-import { ThemeService } from '../../theme.service';
+
+import { ThemeService } from '@app/theme.service';
 import { NgClass, NgFor } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { SplitterModule } from 'primeng/splitter';
 import { AuthService } from '../auth.service';
+import { ButtonComponent } from '@components/button/button.component';
 
 @Component({
   selector: 'auth-layout',
   imports: [
-    CardModule,
-    DividerModule,
-    SplitterModule,
-    ButtonModule,
     NgFor,
     NgClass,
+    ButtonComponent
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',

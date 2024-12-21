@@ -1,7 +1,6 @@
   <div class="p-fluid">
-    <p-divider align="center" type="dotted">
       <b><span class="text-muted-color">Register</span></b>
-    </p-divider>
+
 
     <form #registerForm="ngForm" (ngSubmit)="onRegister()">
       <div class="flex flex-col gap-5">
@@ -11,20 +10,14 @@
             id="firstname"
             type="text"
             pSize="small"
-            pInputText
+     
             [(ngModel)]="user.firstname"
             name="firstname"
             #firstname="ngModel"
             required
             minlength="3"
           />
-          <p-message
-            *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)"
-            severity="error"
-            variant="simple"
-            size="small"
-            text="First Name is required (minimum 3 characters)."
-          ></p-message>
+    
         </div>
 
         <div class="field flex flex-col gap-2">
@@ -33,20 +26,14 @@
             id="lastname"
             type="text"
             pSize="small"
-            pInputText
+       
             [(ngModel)]="user.lastname"
             name="lastname"
             #lastname="ngModel"
             required
             minlength="3"
           />
-          <p-message
-            *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)"
-            severity="error"
-            variant="simple"
-            size="small"
-            text="Last Name is required (minimum 3 characters)."
-          ></p-message>
+       
         </div>
 
         <div class="field flex flex-col gap-2">
@@ -55,20 +42,14 @@
             id="email"
             type="email"
             pSize="small"
-            pInputText
+     
             [(ngModel)]="user.email"
             name="email"
             #email="ngModel"
             required
             email
           />
-          <p-message
-            *ngIf="email.invalid && (email.dirty || email.touched)"
-            severity="error"
-            variant="simple"
-            size="small"
-            text="Valid email is required."
-          ></p-message>
+      
         </div>
 
         <div class="field flex flex-col gap-2">
@@ -77,20 +58,14 @@
             id="password"
             type="password"
             pSize="small"
-            pInputText
+      
             [(ngModel)]="user.password"
             name="password"
             #password="ngModel"
             required
             minlength="6"
           />
-          <p-message
-            *ngIf="password.invalid && (password.dirty || password.touched)"
-            severity="error"
-            variant="simple"
-            size="small"
-            text="Password is required (minimum 6 characters)."
-          ></p-message>
+     
         </div>
 
         <div class="field flex flex-col gap-2">
@@ -99,24 +74,18 @@
             id="confirmPassword"
             type="password"
             pSize="small"
-            pInputText
+
             [(ngModel)]="confirmPassword"
             name="confirmPassword"
             #confirmPasswordCtrl="ngModel"
             required
             minlength="6"
           />
-          <p-message
-            *ngIf="(confirmPasswordCtrl.dirty || confirmPasswordCtrl.touched) && confirmPassword !== user.password"
-            severity="error"
-            variant="simple"
-            size="small"
-            text="Passwords do not match."
-          ></p-message>
+   
         </div>
 
         <button
-          pButton
+   
           size="small"
           label="Register"
           type="submit"

@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { MenuItem } from 'primeng/api';
 
 @Injectable()
 export class BreadcrumbService {
-  private breadcrumbsSubject = new BehaviorSubject<MenuItem[]>([]);
+  private breadcrumbsSubject = new BehaviorSubject<any[]>([]);
   breadcrumbs$ = this.breadcrumbsSubject.asObservable();
 
   constructor(
@@ -24,8 +23,8 @@ export class BreadcrumbService {
   private createBreadcrumbs(
     route: ActivatedRoute,
     url: string = '',
-    breadcrumbs: MenuItem[] = [],
-  ): MenuItem[] {
+    breadcrumbs: any[] = [],
+  ): any[] {
     const children: ActivatedRoute[] = route.children;
 
     if (children.length === 0) {

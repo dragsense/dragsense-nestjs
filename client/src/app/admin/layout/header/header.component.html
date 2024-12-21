@@ -6,15 +6,14 @@
 
   <div class="flex items-center">
     <div class="project-menu-header py-2 flex items-center">
-      <p-button
+      <button
         size="small"
         aria-label="Toggle Sidebar"
         (onClick)="onToggleSidebar()"
-        [icon]="'pi pi-bars'"
         styleClass="text-xl mr-2"
-      />
+      ></button>
 
-      <p-button
+      <button
         size="small"
         aria-label="Select Project"
         (onClick)="onPopoverOpen($event)"
@@ -34,9 +33,9 @@
             ></span>
           </span>
      
-      </p-button>
+      </button>
 
-      <p-popover #op>
+   
         <app-table
           [data]="projects"
           [columns]="columns"
@@ -44,7 +43,7 @@
           (selectionChange)="onSelectProject($event)"
           [selectedMode]="'single'"
         />
-      </p-popover>
+     
     </div>
 
     <div class="flex-1 pl-4">

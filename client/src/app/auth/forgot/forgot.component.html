@@ -1,6 +1,5 @@
-  <p-divider align="center" type="dotted">
     <b><span class="text-muted-color">Forgot Password</span></b>
-  </p-divider>
+
 
   <form #forgotForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="flex flex-col gap-5">
@@ -13,21 +12,15 @@
           pInputText
           [(ngModel)]="email"
           name="email"
-          #emailCtrl="ngModel"
+         
           required
           email
         />
-        <p-message
-          *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Valid email is required."
-        ></p-message>
+
       </div>
 
       <button
-        pButton
+
         label="Send Request"
         type="submit"
         size="small"

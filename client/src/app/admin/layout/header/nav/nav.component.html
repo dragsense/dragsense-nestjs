@@ -17,25 +17,19 @@
       <div class="flex items-center space-x-4">
         <button
           size="small"
-          pButton
+     
           aria-label="Switch Theme"
           (click)="onToggleTheme()"
-          [outlined]="true"
           severity="secondary"
-          [icon]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'"
         ></button>
 
         <div class="card flex justify-center">
-          <p-menu #menu [model]="items" [popup]="true" />
-          <p-button
-            (click)="menu.toggle($event)"
+          <button
             icon="pi pi-user"
-            [rounded]="true"
             size="small"
-          />
+          ></button>
         </div>
       </div>
     </div>
-    <p-divider ngProjectAs="nav-divider" styleClass="m-0" />
   </app-menu>
 </nav>

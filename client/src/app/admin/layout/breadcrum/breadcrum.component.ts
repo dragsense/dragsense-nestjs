@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { BreadcrumbService } from './breadcrum.service';
 
-import { Breadcrumb } from 'primeng/breadcrumb';
 
 @Component({
   selector: 'app-breadcrum',
-  imports: [Breadcrumb],
+  imports: [],
   templateUrl: './breadcrum.component.html',
   styleUrl: './breadcrum.component.scss',
   providers: [BreadcrumbService],
 })
 export class BreadcrumComponent implements OnInit {
-  items: MenuItem[] | undefined;
+  items: any[] | undefined;
 
-  home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
+  home: any = { icon: 'pi pi-home', routerLink: '/' };
 
   constructor(private breadcrumbService: BreadcrumbService) {}
 

@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { RouteService } from '../../routes.service';
-import { AuthRouteType } from '../../config/routes.config';
+import { RouteService } from '@app/routes.service';
+import { AuthRouteType } from '@config/routes.config';
 import { RouterLink } from '@angular/router';
-import { Message } from 'primeng/message';
 import { FormsModule } from '@angular/forms';
-import { Divider } from 'primeng/divider';
-import { InputText } from 'primeng/inputtext';
 import { NgIf } from '@angular/common';
-import {  ButtonModule } from 'primeng/button';
+import { ButtonComponent } from '@components/button/button.component';
 
 @Component({
   selector: 'auth-login',
-  imports: [RouterLink, Message, FormsModule, Divider, InputText, NgIf, ButtonModule],
+  imports: [RouterLink, FormsModule, NgIf, ButtonComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })

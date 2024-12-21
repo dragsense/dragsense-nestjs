@@ -6,14 +6,13 @@ import {
   Column,
 } from '../../../layout/table/interfaces/table.interface';
 import { ProjectRouteType } from '../../../../config/routes.config';
-import { ButtonModule } from 'primeng/button';
 import { Router, RouterLink } from '@angular/router';
 import { PaginatorComponent } from '../../../layout/paginator/paginator.component';
 import { TableComponent } from '../../../layout/table/table.component';
 
 @Component({
   selector: 'project-pages',
-  imports: [RouterLink, ButtonModule, PaginatorComponent, TableComponent],
+  imports: [RouterLink, PaginatorComponent, TableComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   providers: [PageService],

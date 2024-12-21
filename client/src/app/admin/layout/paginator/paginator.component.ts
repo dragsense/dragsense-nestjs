@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { PageEvent } from './interfaces/paginator.interface';
-import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-paginator',
-  imports: [PaginatorModule],
+  imports: [],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
 })

@@ -3,32 +3,32 @@
     <span class="">Project</span>
 
     <div class="flex gap-2">
-      <p-button
+      <button
         type="secondary"
-        [outlined]="true"
+     
         severity="secondary"
         size="small"
         label="Back"
         [routerLink]="projectsPath"
-      />
-      <p-button
+      ></button>
+      <button
         label="Save Project"
         size="small"
         [disabled]="projectForm.invalid"
         (onClick)="onSubmit($event)"
-      />
+      ></button>
     </div>
   </div>
 </ng-template>
 
 <ng-template #footerTemplate>
-  <p-button
+  <button
     label="Save Project"
     size="small"
     [disabled]="projectForm.invalid"
     (onClick)="onSubmit($event)"
     styleClass="w-full h-full"
-  />
+  ></button>
 </ng-template>
 
 <form #projectForm="ngForm">
@@ -41,19 +41,13 @@
           id="identifier"
           type="text"
           pSize="small"
-          pInputText
+        
           [(ngModel)]="project.identifier"
           name="identifier"
           #identifier="ngModel"
           required
         />
-        <p-message
-          *ngIf="identifier.invalid && (identifier.dirty || identifier.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Identifier is required."
-        ></p-message>
+    
       </div>
 
       <!-- Name -->
@@ -63,19 +57,13 @@
           id="name"
           type="text"
           pSize="small"
-          pInputText
+       
           [(ngModel)]="project.name"
           name="name"
           #name="ngModel"
           required
         />
-        <p-message
-          *ngIf="name.invalid && (name.dirty || name.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Name is required."
-        ></p-message>
+
       </div>
 
       <!-- Description -->
@@ -85,19 +73,13 @@
           id="desc"
           rows="3"
           pSize="small"
-          pTextarea
+     
           [(ngModel)]="project.desc"
           name="desc"
           #desc="ngModel"
           required
         ></textarea>
-        <p-message
-          *ngIf="desc.invalid && (desc.dirty || desc.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Description is required."
-        ></p-message>
+      
       </div>
 
       <!-- Domain -->
@@ -107,19 +89,13 @@
           id="domain"
           type="text"
           pSize="small"
-          pInputText
+  
           [(ngModel)]="project.domain"
           name="domain"
           #domain="ngModel"
           required
         />
-        <p-message
-          *ngIf="domain.invalid && (domain.dirty || domain.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Domain is required."
-        ></p-message>
+    
       </div>
 
       <!-- API Prefix -->
@@ -135,13 +111,7 @@
           #apiPrefix="ngModel"
           required
         />
-        <p-message
-          *ngIf="apiPrefix.invalid && (apiPrefix.dirty || apiPrefix.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="API Prefix is required."
-        ></p-message>
+  
       </div>
 
       <!-- API Version -->
@@ -151,19 +121,13 @@
           id="apiVersion"
           type="text"
           pSize="small"
-          pInputText
+          
           [(ngModel)]="project.apiVersion"
           name="apiVersion"
           #apiVersion="ngModel"
           required
         />
-        <p-message
-          *ngIf="apiVersion.invalid && (apiVersion.dirty || apiVersion.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="API Version is required."
-        ></p-message>
+   
       </div>
 
       <!-- Platform -->
@@ -171,24 +135,8 @@
         <label for="platform">Platform</label>
      
 
-        <p-select
-          id="platform"
-          [options]="platformOptions"
-          [(ngModel)]="project.platform"
-          name="platform"
-          optionLabel="label"
-          placeholder="Select a Platform"
-          #platform="ngModel"
-          required
-        />
 
-        <p-message
-          *ngIf="platform.invalid && (platform.dirty || platform.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Platform is required."
-        ></p-message>
+
       </div>
     </div>
   </div>

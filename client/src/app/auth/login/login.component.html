@@ -1,13 +1,11 @@
 <div class="social-login mt-4 flex flex-col gap-2">
   <button
-    pButton
     size="small"
     label="Login with Google"
     icon="pi pi-google"
     class="google-login-btn"
   ></button>
   <button
-    pButton
     size="small"
     label="Login with GitHub"
     icon="pi pi-github"
@@ -15,9 +13,8 @@
   ></button>
 </div>
 
-<p-divider align="center" type="dotted">
-  <b><span class="text-muted-color">Or Login</span></b>
-</p-divider>
+<b><span class="text-muted-color">Or Login</span></b>
+>
 
 <form #loginForm="ngForm" (ngSubmit)="onLogin()">
   <div class="flex flex-col gap-5">
@@ -27,29 +24,22 @@
         id="email"
         type="email"
         pSize="small"
-        pInputText
         [(ngModel)]="email"
         name="email"
         #emailCtrl="ngModel"
         required
         email
       />
-      <p-message
-        *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
-        severity="error"
-        variant="simple"
-        size="small"
-        text="Valid email is required."
-      ></p-message>
     </div>
 
     <div class="field flex flex-col gap-2">
-      <label for="password">Password</label>
+      <label for="password" class="border-gray-100 hover:bg-gray-200 border-dashed"
+        >Password</label
+      >
       <input
         id="password"
         type="password"
         pSize="small"
-        pInputText
         [(ngModel)]="password"
         name="password"
         #passwordCtrl="ngModel"
@@ -57,25 +47,41 @@
         minlength="6"
       />
       <a [routerLink]="forgotPath">Forgot Password?</a>
-      <p-message
-        *ngIf="
-          passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)
-        "
-        severity="error"
-        variant="simple"
-        size="small"
-        text="Password is required (minimum 6 characters)."
-      ></p-message>
     </div>
+    <app-button variant="filled" size="lg"> Primary Button </app-button>
 
-    <p-button
+    <app-button variant="outlined" color="gray" size="md">
+      Primary Button
+    </app-button>
+
+    <app-button
+      variant="outlined"
+      color="slate"
+      size="lg"
+      borderStyle="dashed"
+    >
+      Primary Button
+    </app-button>
+
+    <app-button
+      variant="filled"
+      [colorVaraint]="600"
+      [fullWidth]="true"
+      size="sm"
+      rounded="full"
+    >
+      Primary Button
+    </app-button>
+
+
+    <button
       label="Login"
       type="submit"
       size="small"
       styleClass="w-full"
       [disabled]="loginForm.invalid"
       [routerLink]="adminPath"
-    />
+    ></button>
 
     <div class="">
       <a [routerLink]="registerPath">Create an Account.</a>

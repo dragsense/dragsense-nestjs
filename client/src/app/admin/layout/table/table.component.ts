@@ -1,14 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { TableModule } from 'primeng/table';
 
 import { Action, Column } from './interfaces/table.interface';
 import { CommonModule, NgClass } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-table',
-  imports: [TableModule, ButtonModule, CommonModule, NgClass, RouterLink],
+  imports: [CommonModule, NgClass, RouterLink],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })

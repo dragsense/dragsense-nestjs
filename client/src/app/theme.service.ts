@@ -10,9 +10,9 @@ export class ThemeService {
 
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
-
     const element = document.querySelector('html');
     if (element) element.classList.toggle('dark');
+
   }
 
   getDarkModeStatus(): boolean {

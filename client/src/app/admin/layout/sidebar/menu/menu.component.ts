@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { MenuModule } from 'primeng/menu';
 import { RouteService } from '../../../../routes.service';
 import { ProjectRouteType } from '../../../../config/routes.config';
 
 @Component({
   selector: 'sidebar-menu',
-  imports: [MenuModule],
+  imports: [],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })
 export class MenuComponent implements OnInit {
-  items: MenuItem[] | undefined;
+  items: any[] | undefined;
 
   constructor(private routerService: RouteService) {}
 

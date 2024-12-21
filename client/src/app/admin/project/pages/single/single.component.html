@@ -3,32 +3,29 @@
     <span class="">Page</span>
 
     <div class="flex gap-2">
-      <p-button
+      <pbutton
         type="secondary"
-        [outlined]="true"
         severity="secondary"
         size="small"
         label="Back"
         [routerLink]="pagesPath"
-      />
-      <p-button
+      ></pbutton>
+      <button
         label="Save Page"
         size="small"
-        [disabled]="pageForm.invalid"
         (onClick)="onSubmit($event)"
-      />
+      ></button>
     </div>
   </div>
 </ng-template>
 
 <ng-template #footerTemplate>
-  <p-button
+  <button
     label="Save Page"
     size="small"
-    [disabled]="pageForm.invalid"
     (onClick)="onSubmit($event)"
     styleClass="w-full h-full"
-  />
+  ></button>
 </ng-template>
 
 <form #pageForm="ngForm">
@@ -41,19 +38,12 @@
           id="slug"
           type="text"
           pSize="small"
-          pInputText
           [(ngModel)]="page.slug"
           name="slug"
           #slug="ngModel"
           required
         />
-        <p-message
-          *ngIf="slug.invalid && (slug.dirty || slug.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Slug is required."
-        ></p-message>
+ 
       </div>
 
       <!-- Name -->
@@ -69,14 +59,13 @@
           #name="ngModel"
           required
         />
-        <p-message
-          *ngIf="name.invalid && (name.dirty || name.touched)"
-          severity="error"
-          variant="simple"
-          size="small"
-          text="Name is required."
-        ></p-message>
+    
       </div>
+    </div>
+
+    <div class="field flex flex-col gap-2">
+      <label for="name">Content</label>
+      <p-editor [(ngModel)]="page.content" [style]="{ minHeight: '320px' }" />
     </div>
   </div>
 </form>

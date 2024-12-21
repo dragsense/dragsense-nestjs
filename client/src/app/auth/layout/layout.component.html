@@ -1,7 +1,7 @@
 <header class="mt-10">
   <nav class="text-center">
     <img
-    alt="dragsense-logo"
+      alt="dragsense-logo"
       class="inline-block"
       style="width: 50px"
       src="images/logo/dragsense-logo.png"
@@ -17,7 +17,7 @@
     </div>
 
     <div class="auth-card-container">
-      <p-card styleClass="p-2">
+      <div styleClass="p-2">
         <ng-template pTemplate="header"> </ng-template>
 
         <div class="p-fluid auth-content">
@@ -25,8 +25,6 @@
         </div>
 
         <ng-template pTemplate="footer">
-          <p-divider align="center"></p-divider>
-
           <div class="flex space-x-4">
             <span>Follow Us On: </span>
             <a
@@ -39,20 +37,14 @@
             </a>
           </div>
         </ng-template>
-      </p-card>
+      </div>
     </div>
 
     <div class="self-start">
-      <button
-        size="large"
-        pButton
-        class="p-button-rounded p-button-outlined"
-        style="border: none"
-        aria-label="Switch Theme"
-        (click)="onToggleTheme()"
-      >
+      <app-button (onClick)="onToggleTheme()">
+        Toggle Theme
         <i class="pi" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
-      </button>
+      </app-button>
       <div class="bg-triangle-rotated">
         <img src="images/background/bg-triangles.png" alt="bg" />
       </div>

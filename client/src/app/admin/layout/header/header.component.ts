@@ -3,14 +3,9 @@ import {
   EventEmitter,
   Input,
   Output,
-  ViewChild,
 } from '@angular/core';
 import { NavComponent } from './nav/nav.component';
 import { BreadcrumComponent } from '../breadcrum/breadcrum.component';
-import { ButtonModule } from 'primeng/button';
-import { Popover } from 'primeng/popover';
-import { PopoverModule } from 'primeng/popover';
-import { CardModule } from 'primeng/card';
 import { ProjectService } from '../../projects/project.service';
 import { Project } from '../../projects/interfaces/project.interface';
 import { Column } from '../table/interfaces/table.interface';
@@ -23,11 +18,8 @@ import { NgClass, NgIf } from '@angular/common';
 @Component({
   selector: 'app-header',
   imports: [
-    CardModule,
     NavComponent,
     BreadcrumComponent,
-    ButtonModule,
-    PopoverModule,
     TableComponent,
     NgClass,
     NgIf
@@ -37,7 +29,6 @@ import { NgClass, NgIf } from '@angular/common';
   providers: [ProjectService]
 })
 export class HeaderComponent {
-  @ViewChild('op') op!: Popover;
 
   projects: Partial<Project>[] = [];
   columns!: Column[];
@@ -110,11 +101,11 @@ export class HeaderComponent {
       ); */
     }
 
-    this.op.show(event);
+
   }
 
   onSelectProject(project: any) {
-    this.op.hide();
+
     this.adminService.onSelectProject(project, () => {
       this.router.navigate([`${this.projectPath}`]);
     });

@@ -1,38 +1,12 @@
-@use '@fontsource/poppins'; // Defaults to weight 400
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@layer tailwind-base, primeng, tailwind-utilities;
-
-@layer tailwind-base {
-  @tailwind base;
-
-  body {
-    @apply font-poppins;
+@layer base {
+  html {
+    font-family: theme('fontFamily.poppins');
   }
+
+  
 }
 
-@layer primeng;
-
-html:not(.dark) {
-
-
-
-
-  --p-primary-50: var(--p-accent50);
-  --p-primary-100: var(--p-accent100);
-  --p-primary-200: var(--p-accent200);
-  --p-primary-300: var(--p-accent300);
-  --p-primary-400: var(--p-accent400);
-  --p-primary-500: var(--p-accent500);
-  --p-primary-600: var(--p-accent600);
-  --p-primary-700: var(--p-accent700);
-  --p-primary-800: var(--p-accent800);
-  --p-primary-900: var(--p-accent900);
-  --p-primary-950: var(--p-accent950);
-
-
-}
-
-@layer tailwind-utilities {
-  @tailwind components;
-  @tailwind utilities;
-}

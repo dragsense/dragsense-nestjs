@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ProjectService } from '../project.service';
 import { PlatformType } from '../interfaces/project.interface';
-import { ButtonModule } from 'primeng/button';
 import { TableComponent } from '../../layout/table/table.component';
 import { PaginatorComponent } from '../../layout/paginator/paginator.component';
 import { RouteService } from '../../../routes.service';
@@ -12,7 +11,7 @@ import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'projects-list',
-  imports: [ButtonModule, RouterLink, TableComponent, PaginatorComponent],
+  imports: [ RouterLink, TableComponent, PaginatorComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })

@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { Menubar } from 'primeng/menubar';
+
 import { RouteService } from '../../../../../routes.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
-  imports: [Menubar, RouterLink],
+  imports: [RouterLink],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })
 export class MenuComponent implements OnInit {
-  items: MenuItem[] | undefined;
-  profileitems: MenuItem[] | undefined;
+  items: any[] | undefined;
+  profileitems: any[] | undefined;
 
   constructor(private routerService: RouteService) {}
 

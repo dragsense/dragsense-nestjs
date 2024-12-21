@@ -1,26 +1,17 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
-import { MessageModule } from 'primeng/message';
 import { RouteService } from '../../../routes.service';
 import { PlatformType, Project } from '../interfaces/project.interface';
-import { InputTextModule } from 'primeng/inputtext';
-import { TextareaModule } from 'primeng/textarea';
+
 import { ProjectService } from '../project.service';
 import { NgIf } from '@angular/common';
-import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-project',
   imports: [
     FormsModule,
-    InputTextModule,
-    TextareaModule,
-    MessageModule,
     RouterLink,
-    ButtonModule,
-    Select,
     NgIf
   ],
   templateUrl: './single.component.html',
