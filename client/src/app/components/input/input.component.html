@@ -1,0 +1,25 @@
+<div
+  *ngIf="label; else inputTemplate"
+  [class]="layout === 'ver' ? 'flex flex-col gap-1' : 'flex items-center gap-2'"
+>
+  <!-- Label -->
+  <label [for]="id">
+    <app-text [size]="size" [color]="color">{{
+      label
+    }}</app-text>
+  </label>
+
+  <!-- Input -->
+  <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+</div>
+
+<ng-template #inputTemplate>
+  <input
+    [id]="id"
+    [type]="type"
+    [placeholder]="placeholder"
+    [class]="getClasses()"
+    (input)="handleInput($event)"
+    [disabled]="disabled"
+  />
+</ng-template>
