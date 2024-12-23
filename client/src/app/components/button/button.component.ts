@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { variant, size, colors, colorVaraints, borderStyle, roundedSize } from '../types/shared.types';
+import { variant, size, colors, colorVariants, borderStyle, roundedSize } from '../types/shared.types';
 
 @Component({
   selector: 'app-button',
@@ -11,7 +11,7 @@ export class ButtonComponent {
   @Input() variant: variant = 'filled';
   @Input() color: colors = 'ds-primary';
   @Input() ringColor: colors | undefined;
-  @Input() colorVaraint: colorVaraints = 0;
+  @Input() colorVariant: colorVariants = 0;
   @Input() className: string = '';
   @Input() size: size = 'md';
   @Input() fullWidth: boolean = false;
@@ -36,11 +36,11 @@ export class ButtonComponent {
   };
 
   getClasses(): string {
-    const colorVaraint = this.colorVaraint !== 0 ? `-${this.colorVaraint}` : '';
+    const colorVaraint = this.colorVariant !== 0 ? `-${this.colorVariant}` : '';
     const color = `${this.color}${colorVaraint}`;
 
     const hoverFilledBgColorVaraint = this.calculateHoverVariant(
-      this.colorVaraint,
+      this.colorVariant,
     );
 
     const hoverFilledBgColor = `${this.color}-${hoverFilledBgColorVaraint}`;
@@ -56,7 +56,7 @@ export class ButtonComponent {
         ? `bg-${color} hover:bg-${hoverFilledBgColor} ${hoverFilledTextColor}`
         : this.variant === 'outlined'
           ? `border border-${color} ${borderStyle} ${hoverBGClasses} ${hoverTextColor}`
-          : `border-${color} ${borderStyle} ${hoverBGClasses} ${hoverTextColor}`;
+          : `${hoverBGClasses} ${hoverTextColor}`;
 
     classes +=
       this.size === 'sm'

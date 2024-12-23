@@ -1,0 +1,1 @@
+export type messageTypes = 'error' | 'success' | 'info' | 'warning';

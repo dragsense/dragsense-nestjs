@@ -1,16 +1,32 @@
 <div
   *ngIf="label; else inputTemplate"
-  [class]="layout === 'ver' ? 'flex flex-col gap-1' : 'flex items-center gap-2'"
+  [class]="
+    layout === 'vertical' ? 'flex flex-col gap-1' : 'flex items-center gap-2'
+  "
 >
-  <!-- Label -->
+
   <label [for]="id">
-    <app-text [size]="size" [color]="color">{{
+    <app-message [size]="size" [color]="color" [className]="labelClass">{{
       label
-    }}</app-text>
+    }}</app-message>
   </label>
 
-  <!-- Input -->
-  <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+  <div class="form-input relative flex-1">
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+
+    <ng-container *ngIf="hasIcon">
+      <div
+        class="inset-y-0"
+        [ngClass]="{
+          'left-0': iconPosition === 'leading',
+          'right-0': iconPosition === 'trailing',
+        }"
+        [class]="iconClasses"
+        [innerHTML]="icon | safeHtml"
+      >
+      </div>
+    </ng-container>
+  </div>
 </div>
 
 <ng-template #inputTemplate>
@@ -18,8 +34,23 @@
     [id]="id"
     [type]="type"
     [placeholder]="placeholder"
-    [class]="getClasses()"
+    [class]="classes"
+    [ngClass]="{
+      '!ring-red-700 dark:!ring-red-300': error,
+    }"
     (input)="handleInput($event)"
     [disabled]="disabled"
+    [name]="name"
   />
+  <ng-container *ngIf="error">
+    <div class="input-error mt-1">
+      <app-message
+        [size]="size"
+        color="red"
+        [className]="errorClass"
+        [colorVariant]="300"
+        >{{ error }}</app-message
+      >
+    </div>
+  </ng-container>
 </ng-template>

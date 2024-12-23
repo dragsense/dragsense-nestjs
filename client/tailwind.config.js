@@ -42,7 +42,7 @@ module.exports = {
   safelist: [
     {
       pattern:
-        /(bg|border|text|ring)-(ds-primary|ds-secondary|primary|secondary|slate|gray|zinc|neutral|red|yellow|green)(-(50|100|200|300|400|500|600|700|800|900|950))?/,
+        /(bg|border|text|ring|fill)-(ds-primary|ds-secondary|primary|secondary|slate|gray|zinc|neutral|red|yellow|green)(-(50|100|200|300|400|500|600|700|800|900|950))?/,
       variants: ['hover', 'focus', 'dark', 'hover:dark'],
     },
     {

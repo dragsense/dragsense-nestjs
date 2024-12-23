@@ -16,7 +16,7 @@ export type colors =
   | 'yellow'
   | 'green';
 
-export type colorVaraints =
+export type colorVariants =
   | 0
   | 50
   | 100
