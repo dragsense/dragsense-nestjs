@@ -1,34 +1,45 @@
 <ng-template #headerTemplate>
-    <div class="flex justify-between items-center w-full">
-      <span class="">Projects</span>
-      <p-button
-        type="secondary"
-      
-        severity="secondary"
-        size="small"
-        label="Add New"
-        icon="pi pi-plus"
-        [routerLink]="singlePath"
-      />
+  <div fd-action-bar>
+    <div fd-action-bar-header>
+      <div fd-action-bar-title>Projects</div>
+      <div fd-action-bar-actions>
+        <button
+          fd-button
+          label="Create New"
+          glyph="add"
+          [routerLink]="singlePath"
+          fdType="emphasized"
+          fdCompact
+        ></button>
+      </div>
     </div>
-  </ng-template>
-  
-  <ng-template #contentTemplate>
-    <p>Welcome to the dashboard. This is the main content area.</p>
-  </ng-template>
-  
-  <ng-template #footerTemplate>
-    <app-paginator
-      [rows]="10"
-      [total]="projects.length"
-      [first]="0"
-      [styleClass]="'p-0 bg-transparent'"
-  /></ng-template>
-  
-  <app-table
-    [data]="projects"
-    [columns]="columns"
-    [styleClass]="'p-datatable-lg'"
-    [actions]="actions"
-  />
-  
+    <p fd-action-bar-description>
+      Connect your projects to your data and website.
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #contentTemplate>
+  <p>Welcome to the dashboard. This is the main content area.</p>
+</ng-template>
+
+<ng-template #footerTemplate>
+  <div fd-bar barDesign="footer">
+    <div fd-bar-right>
+      <app-paginator />
+    </div>
+  </div>
+</ng-template>
+
+<div class="my-4" *ngIf="errorMessage">
+  <fd-message-strip [type]="'error'" [dismissible]="false">
+    {{ errorMessage }}
+  </fd-message-strip>
+</div>
+
+<app-table
+  [data]="projects"
+  [columns]="columns"
+  [actions]="actions"
+  [loading]="loading"
+></app-table>

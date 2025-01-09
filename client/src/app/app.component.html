@@ -1,3 +1,16 @@
-<div class="app container-fluid m-auto p-2 bg-white dark:bg-zinc-950">
-    <router-outlet />
+<div class="app container-fluid m-auto">
+  <div
+    *ngIf="isLoading; else app"
+    class="fixed top-0 left-0 z-[100] bg-zinc-200 bg-opacity-70 w-screen h-screen flex justify-center items-center"
+  >
+    <fd-busy-indicator
+      [loading]="true"
+      ariaLabel="Loading"
+      title="Please Wait"
+    ></fd-busy-indicator>
+  </div>
+
+  <ng-template #app>
+    <router-outlet></router-outlet>
+  </ng-template>
 </div>

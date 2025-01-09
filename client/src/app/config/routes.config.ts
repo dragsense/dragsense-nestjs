@@ -11,6 +11,7 @@ export const ROUTES: RoutesType = {
   admin: {
     base: 'admin',
     dashboard: 'dashboard',
+    profile: 'profile',
     projects: {
       base: 'projects',
       list: 'list',
@@ -71,6 +72,7 @@ export enum AuthRouteType {
 
 export enum AdminRouteType {
   Dashboard = 'dashboard',
+  Profile = 'profile',
   Projects = 'projects',
   Project = 'project',
   Teams = 'teams',

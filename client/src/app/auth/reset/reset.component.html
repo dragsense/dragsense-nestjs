@@ -1,50 +1,72 @@
-  <div class="p-fluid">
-      <b><span class="text-muted-color">Reset Password</span></b>
-   
+<h4><strong>Reset Password</strong></h4>
 
-    <form #resetForm="ngForm" (ngSubmit)="onReset()">
-      <div class="flex flex-col gap-5">
-        <div class="field flex flex-col gap-2">
-          <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            pSize="small"
-            [(ngModel)]="password"
-            name="password"
-            #passwordCtrl="ngModel"
-            required
-            minlength="6"
-          />
-       
-        </div>
+<div class="my-4" *ngIf="submitError">
+  <fd-message-strip [type]="'error'" [dismissible]="false">
+    {{ submitError }}
+  </fd-message-strip>
+</div>
 
-        <div class="field flex flex-col gap-2">
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            pSize="small"
-            [(ngModel)]="confirmPassword"
-            name="confirmPassword"
-            #confirmPasswordCtrl="ngModel"
-            required
-            minlength="6"
-          />
-      
-        </div>
+<div class="my-4" *ngIf="submitSuccess">
+  <fd-message-strip [type]="'success'" [dismissible]="false">
+    {{ submitSuccess }}
+  </fd-message-strip>
+</div>
 
-        <button
-      
-          size="small"
-          label="Reset"
-          type="submit"
-          [disabled]="resetForm.invalid"
-        ></button>
-
-        <div class="">
-          <a  [routerLink]="loginPath">Login</a>
-        </div>
-      </div>
-    </form>
+<form #resetForm="ngForm" (ngSubmit)="onReset()">
+  <div class="flex flex-col">
+  
+  <!-- Password -->
+  <div fd-form-item>
+    <label fd-form-label for="password" [required]="true">Password</label>
+    <input
+      fd-form-control
+      [(ngModel)]="password"
+      name="password"
+      type="password"
+      [required]="true"
+      id="password"
+      placeholder="Enter Your Password"
+      (ngModelChange)="validatePassword()"
+    />
+    <fd-form-message *ngIf="passwordError" [type]="'error'">{{ passwordError }}</fd-form-message>
   </div>
+
+  <!-- Confirm Password -->
+  <div fd-form-item>
+    <label fd-form-label for="confirmPassword" [required]="true">Confirm Password</label>
+    <input
+      fd-form-control
+      [(ngModel)]="confirmPassword"
+      name="confirmPassword"
+      type="password"
+      [required]="true"
+      id="confirmPassword"
+      placeholder="Confirm Your Password"
+      (ngModelChange)="validateConfirmPassword()"
+    />
+    <fd-form-message *ngIf="confirmPasswordError" [type]="'error'">{{ confirmPasswordError }}</fd-form-message>
+  </div>
+    
+    <div class="mt-2 text-right">
+      <fd-busy-indicator
+        [loading]="isSubmitting"
+        size="s"
+        aria-labelledby="fd-busy-indicator-submit"
+        title="Inline Wrapper"
+      > 
+        <button
+          fd-button
+          label="Reset"
+          fdType="emphasized"
+          ariaLabel="Reset"
+          type="submit"
+          [disabled]="hasErrors()"
+        ></button>
+      </fd-busy-indicator>
+    </div>
+
+    <div class="mt-5">
+      <a [routerLink]="loginPath">Login</a>
+    </div>
+  </div>
+</form>

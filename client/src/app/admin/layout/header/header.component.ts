@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { AdminService } from '../../admin.service';
 import { NgClass, NgIf } from '@angular/common';
 
+
 @Component({
   selector: 'app-header',
   imports: [
@@ -22,7 +23,8 @@ import { NgClass, NgIf } from '@angular/common';
     BreadcrumComponent,
     TableComponent,
     NgClass,
-    NgIf
+    NgIf,
+
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -34,10 +36,6 @@ export class HeaderComponent {
   columns!: Column[];
   selectedProject!: any | null;
   projectPath!: string;
-
-  @Input() isDarkMode: boolean = false;
-  @Output() toggleSidebar = new EventEmitter<void>();
-  @Output() toggleTheme = new EventEmitter<void>();
 
   constructor(
     private projectService: ProjectService,
@@ -111,11 +109,7 @@ export class HeaderComponent {
     });
   }
 
-  onToggleTheme() {
-    this.toggleTheme.emit();
-  }
 
-  onToggleSidebar() {
-    this.toggleSidebar.emit();
-  }
+
+
 }

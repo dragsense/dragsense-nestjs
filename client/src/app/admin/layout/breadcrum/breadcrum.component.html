@@ -1,0 +1,21 @@
+<div class="p-4">
+  <fd-breadcrumb>
+    <fd-breadcrumb-item>
+      <a fd-link routerLink="/admin">
+        home
+      </a>
+    </fd-breadcrumb-item>
+    <ng-container *ngFor="let item of items">
+      <fd-breadcrumb-item>
+        <ng-container *ngIf="!item.disabled">
+          <a fd-link [routerLink]="item.routerLink">
+            {{ item.label }}
+          </a>
+        </ng-container>
+        <ng-container *ngIf="item.disabled">
+          {{ item.label }}
+        </ng-container>
+      </fd-breadcrumb-item>
+    </ng-container>
+  </fd-breadcrumb>
+</div>

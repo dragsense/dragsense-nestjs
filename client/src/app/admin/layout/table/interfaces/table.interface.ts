@@ -30,19 +30,13 @@ export type NonRoutableColumn = BaseColumn & {
 export type Column = RoutableColumn | ExternalLinkColumn | NonRoutableColumn;
 
 export interface ButtonBase {
-  severity?:
-    | 'info'
-    | 'success'
-    | 'warn'
-    | 'danger'
-    | 'secondary'
-    | 'contrast'
-    | 'help'
-    | 'primary';
-  variant?: 'text' | 'outlined';
-  size?: 'small' | 'large';
-  outlined?: boolean;
-  text?: boolean;
+  type?:
+    | 'emphasized'
+    | 'ghost'
+    | 'positive'
+    | 'attention'
+    | 'transparent'
+    | 'negative';
   link?: boolean;
 }
 
@@ -58,5 +52,5 @@ export interface ButtonWithText extends ButtonBase {
 
 export interface Action {
   button: ButtonWithText | ButtonWithIcon;
-  onClick: (row: any) => void;
+  command: (row: any) => void;
 }

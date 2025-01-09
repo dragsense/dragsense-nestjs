@@ -1,100 +1,124 @@
-  <div class="p-fluid">
-      <b><span class="text-muted-color">Register</span></b>
+<h4><strong>Register</strong></h4>
+
+<div class="my-4" *ngIf="submitError">
+  <fd-message-strip [type]="'error'" [dismissible]="false">
+    {{ submitError }}
+  </fd-message-strip>
+</div>
+
+<div class="my-4" *ngIf="submitSuccess">
+  <fd-message-strip [type]="'success'" [dismissible]="false">
+    {{ submitSuccess }}
+  </fd-message-strip>
+</div>
+
+<form #registerForm="ngForm" (ngSubmit)="onRegister()" class="flex flex-col">
 
 
-    <form #registerForm="ngForm" (ngSubmit)="onRegister()">
-      <div class="flex flex-col gap-5">
-        <div class="field flex flex-col gap-2">
-          <label for="firstname">First Name</label>
-          <input
-            id="firstname"
-            type="text"
-            pSize="small"
-     
-            [(ngModel)]="user.firstname"
-            name="firstname"
-            #firstname="ngModel"
-            required
-            minlength="3"
-          />
-    
-        </div>
+ 
 
-        <div class="field flex flex-col gap-2">
-          <label for="lastname">Last Name</label>
-          <input
-            id="lastname"
-            type="text"
-            pSize="small"
-       
-            [(ngModel)]="user.lastname"
-            name="lastname"
-            #lastname="ngModel"
-            required
-            minlength="3"
-          />
-       
-        </div>
-
-        <div class="field flex flex-col gap-2">
-          <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            pSize="small"
-     
-            [(ngModel)]="user.email"
-            name="email"
-            #email="ngModel"
-            required
-            email
-          />
-      
-        </div>
-
-        <div class="field flex flex-col gap-2">
-          <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            pSize="small"
-      
-            [(ngModel)]="user.password"
-            name="password"
-            #password="ngModel"
-            required
-            minlength="6"
-          />
-     
-        </div>
-
-        <div class="field flex flex-col gap-2">
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            pSize="small"
-
-            [(ngModel)]="confirmPassword"
-            name="confirmPassword"
-            #confirmPasswordCtrl="ngModel"
-            required
-            minlength="6"
-          />
-   
-        </div>
-
-        <button
-   
-          size="small"
-          label="Register"
-          type="submit"
-          [disabled]="registerForm.invalid"
-        ></button>
-
-        <div class="">
-          <a  [routerLink]="loginPath">Already have an account? Login</a>
-        </div>
-      </div>
-    </form>
+  <!-- First Name -->
+  <div fd-form-item>
+    <label fd-form-label for="firstname">First Name</label>
+    <input
+      fd-form-control
+      [(ngModel)]="user.firstname"
+      name="firstname"
+      type="text"
+  
+      id="firstname"
+      placeholder="Enter Your First Name"
+      (ngModelChange)="validateFirstName()"
+    />
+    <fd-form-message *ngIf="firstnameError" [type]="'error'">{{ firstnameError }}</fd-form-message>
   </div>
+
+  <!-- Last Name -->
+  <div fd-form-item>
+    <label fd-form-label for="lastname" [required]="true">Last Name</label>
+    <input
+      fd-form-control
+      [(ngModel)]="user.lastname"
+      name="lastname"
+      type="text"
+      [required]="true"
+      id="lastname"
+      placeholder="Enter Your Last Name"
+      (ngModelChange)="validateLastName()"
+    />
+    <fd-form-message *ngIf="lastnameError" [type]="'error'">{{ lastnameError }}</fd-form-message>
+  </div>
+
+  <!-- Email -->
+  <div fd-form-item>
+    <label fd-form-label for="email" [required]="true">Email</label>
+    <input
+      fd-form-control
+      [(ngModel)]="user.email"
+      name="email"
+      type="email"
+      [required]="true"
+      id="email"
+      placeholder="Enter Your Email"
+      (ngModelChange)="validateEmail()"
+    />
+    <fd-form-message *ngIf="emailError" [type]="'error'">{{ emailError }}</fd-form-message>
+  </div>
+
+  <!-- Password -->
+  <div fd-form-item>
+    <label fd-form-label for="password" [required]="true">Password</label>
+    <input
+      fd-form-control
+      [(ngModel)]="user.password"
+      name="password"
+      type="password"
+      [required]="true"
+      id="password"
+      placeholder="Enter Your Password"
+      (ngModelChange)="validatePassword()"
+    />
+    <fd-form-message *ngIf="passwordError" [type]="'error'">{{ passwordError }}</fd-form-message>
+  </div>
+
+  <!-- Confirm Password -->
+  <div fd-form-item>
+    <label fd-form-label for="confirmPassword" [required]="true">Confirm Password</label>
+    <input
+      fd-form-control
+      [(ngModel)]="confirmPassword"
+      name="confirmPassword"
+      type="password"
+      [required]="true"
+      id="confirmPassword"
+      placeholder="Confirm Your Password"
+      (ngModelChange)="validateConfirmPassword()"
+    />
+    <fd-form-message *ngIf="confirmPasswordError" [type]="'error'">{{ confirmPasswordError }}</fd-form-message>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="mt-2 text-right">
+    <fd-busy-indicator
+    [loading]="isSubmitting"
+    size="s"
+    aria-labelledby="fd-busy-indicator-submit"
+    title="Inline Wrapper"
+  >
+    <button
+      fd-button
+      label="Register"
+      fdType="emphasized"
+      ariaLabel="Register"
+      type="submit"
+      [disabled]="hasErrors()"
+    ></button>
+
+    </fd-busy-indicator>
+    
+  </div>
+
+  <div class="mt-5">
+    <a [routerLink]="loginPath">Already have an account? Login</a>
+  </div>
+</form>

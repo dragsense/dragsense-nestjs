@@ -1,4 +1,33 @@
+<ng-container *ngIf="isLoggedIn">
+  <admin-layout>
+    <div class="px-2 my-4" *ngIf="message">
+      <fd-message-strip [type]="'information'">
+        {{ message }}
+      </fd-message-strip>
+    </div>
 
-<admin-layout>
-  <router-outlet  />
-</admin-layout>
+    <div class="px-2 my-4" *ngIf="successMessage">
+      <fd-message-strip [type]="'success'">
+        {{ successMessage }}
+      </fd-message-strip>
+    </div>
+
+    <div class="px-2 my-4" *ngIf="errorMessage">
+      <fd-message-strip [type]="'error'">
+        {{ errorMessage }}
+        <ng-container *ngIf="showResendButton">
+          <fd-busy-indicator [loading]="isSending" [size]="'s'">
+            <fdp-link
+              (click)="resendVerificationLink()"
+              [title]="'Resend Verification Email'"
+            >
+              Resend Verification Email
+            </fdp-link>
+          </fd-busy-indicator>
+        </ng-container>
+      </fd-message-strip>
+    </div>
+
+    <router-outlet />
+  </admin-layout>
+</ng-container>

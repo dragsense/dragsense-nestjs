@@ -1,20 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { PageEvent } from './interfaces/paginator.interface';
+import { PaginationModule } from '@fundamental-ngx/core/pagination';
 
 @Component({
   selector: 'app-paginator',
-  imports: [],
+  imports: [PaginationModule],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
 })
 export class PaginatorComponent {
-  @Input() rows: number = 10;
-  @Input() first: number = 0;
-  @Input() total: number = 0;
-  @Input() styleClass: string = '';
+  totalItems = 50;
+  itemsPerPage = 10;
+  currentPage = 1;
 
-  onPageChange(event: PageEvent) {
-    this.first = event.first ?? 0;
-    this.rows = event.rows ?? 10;
-  }
+  pageChanged(event: number): void {
+    this.currentPage = event;
+}
 }

@@ -1,6 +1,38 @@
-<ng-template #headerTemplate> Dashboard Header </ng-template>
-<ng-template #footerTemplate> Dashboard Footer </ng-template>
+<ng-template #headerTemplate>
+  <div fd-action-bar>
+    <div fd-action-bar-header>
+      <div fd-action-bar-title>Dashboard</div>
+      <div fd-action-bar-actions>
+        <button
+          fd-button
+          label="Create New Project"
+          fdType="emphasized"
+          glyph="add"
+          [routerLink]="singleProjectPath"
+        ></button>
+      </div>
+    </div>
+    <p fd-action-bar-description>
+      Manage your content seamlessly with DragSense CMS.
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #footerTemplate> </ng-template>
 
 <app-main [headerTemplate]="headerTemplate" [footerTemplate]="footerTemplate">
-  <p>Welcome to the dashboard. This is the main content area.</p>
+  <div class="flex justify-center items-center flex-col text-center h-full">
+    <p class="prose pb-5">
+      Welcome to DragSense, your solution for streamlined web management.
+      Explore your projects to get started.
+    </p>
+
+    <div class="flex justify-center gap-5">
+      <button
+        fd-button
+        label="Go To Projects"
+        [routerLink]="projectsPath"
+      ></button>
+    </div>
+  </div>
 </app-main>

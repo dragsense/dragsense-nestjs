@@ -1,34 +1,56 @@
-    <b><span class="text-muted-color">Forgot Password</span></b>
+<h4><strong>Forgot Password</strong></h4>
 
+<div class="my-4" *ngIf="submitError">
+  <fd-message-strip [type]="'error'" [dismissible]="false">
+    {{ submitError }}
+  </fd-message-strip>
+</div>
 
-  <form #forgotForm="ngForm" (ngSubmit)="onSubmit()">
-    <div class="flex flex-col gap-5">
-      <div class="field flex flex-col gap-2">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          pSize="small"
-          pInputText
-          [(ngModel)]="email"
-          name="email"
-         
-          required
-          email
-        />
+<div class="my-4" *ngIf="submitSuccess">
+  <fd-message-strip [type]="'success'" [dismissible]="false">
+    {{ submitSuccess }}
+  </fd-message-strip>
+</div>
 
-      </div>
-
-      <button
-
-        label="Send Request"
-        type="submit"
-        size="small"
-        [disabled]="forgotForm.invalid"
-      ></button>
-
-      <div class="">
-        <a [routerLink]="loginPath">Login</a>
-      </div>
+<form #forgotForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col">
+    <div fd-form-item>
+      <label fd-form-label [required]="true" for="email">Email</label>
+      <fd-input-group
+        [(ngModel)]="email"
+        name="email"
+        id="email"
+        [required]="true"
+        glyph="email"
+        glyphAriaLabel="Email"
+        placeholder="Enter Your Email"
+        [state]="emailState"
+        (ngModelChange)="validateEmail()"
+      ></fd-input-group>
+      <fd-form-message *ngIf="emailError" [type]="'error'">{{
+        emailError
+      }}</fd-form-message>
     </div>
-  </form>
+
+    <div class="mt-2 text-right">
+      <fd-busy-indicator
+        [loading]="isSubmitting"
+        size="s"
+        aria-labelledby="fd-busy-indicator-submit"
+        title="Inline Wrapper"
+      >
+        <button
+          fd-button
+          label="Send Request"
+          fdType="emphasized"
+          [disabled]="hasErrors()"
+          type="submit"
+        ></button>
+      </fd-busy-indicator>
+    </div>
+
+    <div class="mt-5">
+      <a [routerLink]="loginPath">Login</a>
+    </div>
+  </div>
+</form>

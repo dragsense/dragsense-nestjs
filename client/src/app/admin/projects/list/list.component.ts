@@ -8,10 +8,31 @@ import { Router, RouterLink } from '@angular/router';
 import { Action, Column } from '../../layout/table/interfaces/table.interface';
 import { ProjectsRouteType } from '../../../config/routes.config';
 import { AdminService } from '../../admin.service';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
+import {
+  BarComponent,
+  BarRightDirective,
+  ButtonBarComponent,
+} from '@fundamental-ngx/core/bar';
+import { catchError, finalize } from 'rxjs';
+import { NgIf } from '@angular/common';
+import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 
 @Component({
   selector: 'projects-list',
-  imports: [ RouterLink, TableComponent, PaginatorComponent],
+  imports: [
+    RouterLink,
+    TableComponent,
+    PaginatorComponent,
+    ButtonComponent,
+    ActionBarModule,
+    BarComponent,
+    BarRightDirective,
+    ButtonBarComponent,
+    NgIf,
+    MessageStripModule,
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
@@ -19,12 +40,16 @@ export class ListComponent implements OnInit {
   @ViewChild('headerTemplate') headerTemplate!: TemplateRef<any>;
   @ViewChild('footerTemplate') footerTemplate!: TemplateRef<any>;
 
-  projects!: any[];
-  projectPath!: string;
-  singlePath!: string;
+  projects: any[] = [];
+  projectPath: string = '';
+  singlePath: string = '';
 
-  columns!: Column[];
-  actions!: Action[];
+  columns: Column[] = [];
+  actions: Action[] = [];
+
+  errorMessage: string = '';
+
+  loading = false;
 
   constructor(
     private projectService: ProjectService,
@@ -37,20 +62,14 @@ export class ListComponent implements OnInit {
     this.singlePath = this.routeService.getProjectsPath(
       ProjectsRouteType.Single,
     );
-
     this.projectPath = this.routeService.getProjectPath();
 
     this.columns = [
-      { field: 'id', header: 'Id' },
+      { field: 'id', header: 'ID' },
       {
         field: 'identifier',
         header: 'Identifier',
-        class: 'cursor-pointer no-underline hover:underline',
-        onClick: (project: any) => {
-          this.adminService.onSelectProject(project, () => {
-            this.router.navigate([`${this.projectPath}`]);
-          });
-        },
+        onClick: (project) => this.onSelectProject(project),
       },
       { field: 'name', header: 'Name' },
       { field: 'platform', header: 'Platform' },
@@ -59,54 +78,78 @@ export class ListComponent implements OnInit {
     this.actions = [
       {
         button: {
-          icon: 'pi pi-pencil',
-          severity: 'secondary',
-          size: 'small',
-          text: true,
+          icon: 'edit',
+          type: 'transparent',
         },
-        onClick: (row: any) => this.onEditProject(row),
+        command: (project) => this.onEditProject(project),
       },
       {
         button: {
-          icon: 'pi pi-trash',
-          severity: 'danger',
-          size: 'small',
-          text: true,
+          icon: 'delete',
+          type: 'negative',
         },
-        onClick: (row: any) => this.onDeleteProject(row),
+        command: (project) => this.onDeleteProject(project),
       },
     ];
 
-    this.projects = [
-      {
-        id: 0,
-        identifier: 'project1',
-        name: 'My Project 2',
-        platform: PlatformType.NodeJS,
-      },
-      {
-        id: 1,
-        identifier: 'project2',
-        name: 'My Project 1',
-        platform: PlatformType.Laravel,
-      },
-      {
-        id: 2,
-        identifier: 'project2',
-        name: 'My Project 2',
-        platform: PlatformType.NodeJS,
-      },
-    ];
+    this.fetchProjects();
+  }
 
-    this.projectService.getAll().subscribe(
-      (response) => {},
-      (error) => {},
-    );
+  fetchProjects() {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.projectService
+      .getAll()
+      .pipe(
+        catchError((error) => {
+          this.errorMessage = 'An unexpected error occurred. Please try again.';
+
+          throw error;
+        }),
+        finalize(() => {
+          this.loading = false;
+        }),
+      )
+      .subscribe((response) => {
+        this.projects = response;
+      });
+  }
+
+  deleteProject(id: number) {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.projectService
+      .delete(id)
+      .pipe(
+        catchError((error) => {
+          this.errorMessage = 'An unexpected error occurred. Please try again.';
+
+          throw error;
+        }),
+        finalize(() => {
+          this.loading = false;
+        }),
+      )
+      .subscribe((response) => {
+        this.fetchProjects();
+      });
+  }
+
+  onSelectProject(project: any) {
+    this.adminService.onSelectProject(project, () => {
+      this.router.navigate([this.projectPath]);
+    });
   }
 
   onEditProject(project: any) {
     this.router.navigate([`${this.singlePath}`, { id: project.id }]);
   }
 
-  onDeleteProject(project: any) {}
+  onDeleteProject(project: any) {
+    if (project && project.id) {
+      this.deleteProject(project.id);
+    }
+  }
 }

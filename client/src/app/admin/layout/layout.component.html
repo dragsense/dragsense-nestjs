@@ -1,22 +1,26 @@
-<div class="app-top">
-  <app-header
-    (toggleTheme)="toggleTheme()"
-    (toggleSidebar)="toggleSidebar()"
-  ></app-header>
+<div fdbToolLayout>
+  <div fdbToolLayoutContainer>
+    <div fdbToolLayoutHeaderContainer>
+      <app-header
+        (toggleSidebar)="toggleSidebar()"
+      ></app-header>
+    </div>
+  </div>
+  <div fdbToolLayoutContainer>
+    <div fdbToolLayoutNavigationContainer>
+      <app-sidebar></app-sidebar>
+    </div>
+    <div fdbToolLayoutContentContainer>
+      <app-breadcrum />
+      <hr class="m-0 mb-2" />
+      <ng-content />
+    </div>
+  </div>
+  <div fd-bar barDesign="footer">
+    <div fd-bar-middle>
+      <app-footer></app-footer>
+    </div>
+  </div>
+  
 </div>
 
-<div class="app-middle flex items-stretch">
-  <div
-    class="rounded bg-surface-50 dark:bg-surface-900 relative"
-    *ngIf="isSidebarVisible"
-  >
-    <app-sidebar></app-sidebar>
-  </div>
-  <div class="flex-1">
-    <ng-content />
-  </div>
-</div>
-
-<div class="app-bottom">
-  <app-footer></app-footer>
-</div>

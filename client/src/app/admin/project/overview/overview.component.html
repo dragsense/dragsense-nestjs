@@ -1,42 +1,84 @@
 <ng-template #headerTemplate>
-  <span>Project Overview</span>
+  <div fd-action-bar>
+    <div fd-action-bar-header>
+      <div fd-action-bar-title>Project Overview</div>
+      <div fd-action-bar-actions>
+        <button
+          fd-button
+          label="Go To Settings"
+          glyph="add"
+          [routerLink]="settingsPath"
+          fdType="emphasized"
+          fdCompact
+        ></button>
+      </div>
+    </div>
+    <p fd-action-bar-description>Project overview and connection status.</p>
+  </div>
 </ng-template>
 
 <app-main [headerTemplate]="headerTemplate" [footerTemplate]="footerTemplate">
-  <div class="space-y-6">
-    <!-- Project Title and Description -->
-    <h2 class="text-xl font-bold">
-      {{ project?.name || 'No Project Selected' }}
-    </h2>
+  <div class="">
+    <ng-container *ngIf="project; else noproject">
+      <fd-quick-view>
+        <fd-quick-view-subheader>
+          <fd-quick-view-subheader-title class="prose">
+            {{ project.name }}
+          </fd-quick-view-subheader-title>
+          <fd-quick-view-subheader-subtitle class="prose">
+            Identifier: <strong>{{ project.identifier }}</strong>
+          </fd-quick-view-subheader-subtitle>
 
-    <!-- Project Details Grid -->
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
-    >
-      <div class="space-y-2">
-        <span class="text-primary">Status</span>
-        <p
-          [ngClass]="{
-            ' text-green-600': project?.connected,
-            ' text-red-600': !project?.connected,
-          }"
-          class="bg-surface-100 px-3 py-1 rounded-full text-sm font-semibold"
-        >
-          {{ project?.connected ? 'Connected to Server' : 'Not Connected' }}
-        </p>
-      </div>
-      <div class="space-y-2">
-        <span class="text-primary">Domain</span>
-        <p class="text-gray-600">{{ project?.domain || 'N/A' }}</p>
-      </div>
-      <div class="space-y-2">
-        <span class="text-primary">Platform</span>
-        <p class="text-gray-600">{{ project?.platform || 'N/A' }}</p>
-      </div>
-    </div>
+        </fd-quick-view-subheader>
 
-    <p class="text-gray-600">
-      {{ project?.desc || 'No description available.' }}
-    </p>
+    
+
+        <fd-quick-view-group>
+          <fd-quick-view-group-item>
+            <fd-quick-view-group-item-content class="prose">
+            Status: <span
+              [ngClass]="{
+                ' text-green-600': project.connected,
+                ' text-red-600': !project.connected,
+              }"
+              class="prose bg-zinc-50 hover:bg-zinc-100 px-3 py-1 rounded-full text-sm font-semibold"
+            >
+              {{ project.connected ? 'Connected to Server' : 'Not Connected' }}
+            </span>
+            </fd-quick-view-group-item-content>
+          </fd-quick-view-group-item>
+        </fd-quick-view-group>
+
+        <fd-quick-view-group >
+   
+          <fd-quick-view-group-item>
+            <fd-quick-view-group-item-content class="prose">
+              Server Url:
+              <a [href]="project.serverUrl"
+                ><strong>{{ project.serverUrl }}</strong></a
+              >
+            </fd-quick-view-group-item-content>
+          </fd-quick-view-group-item>
+
+          <fd-quick-view-group-item>
+            <fd-quick-view-group-item-content class="prose">
+              API URL : <strong>{{ getApiUrl(project) }}</strong>
+            </fd-quick-view-group-item-content>
+          </fd-quick-view-group-item>
+
+          <fd-quick-view-group-item>
+            <fd-quick-view-group-item-label>
+              Project Description
+            </fd-quick-view-group-item-label>
+            <fd-quick-view-group-item-content class="prose max-w-full">
+              <p>{{ project.desc }}</p>
+            </fd-quick-view-group-item-content>
+          </fd-quick-view-group-item>
+        </fd-quick-view-group>
+      </fd-quick-view>
+    </ng-container>
+    <ng-template #noproject>
+      <h4 class="font-bold">No Project Selected</h4>
+    </ng-template>
   </div>
 </app-main>

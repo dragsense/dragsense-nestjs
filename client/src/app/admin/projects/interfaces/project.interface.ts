@@ -9,9 +9,9 @@ export interface Project {
   apiKey: string;
   name: string;
   desc: string;
-  domain: string;
+  serverUrl: string;
   apiPrefix: string;
-  apiVersion: string;
+  apiVer: string;
   platform: PlatformType.NodeJS | PlatformType.Laravel;
   connected: boolean
 }

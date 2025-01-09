@@ -1,35 +1,83 @@
-<nav class="app-navbar">
-  <app-menu>
-    <div
-      ngProjectAs="nav-start"
-      class="app-logo"
+<fdb-tool-header
+  id="dragsense-toolbar"
+  productName="DragSense"
+  secondTitle="CMS"
+  showMenuButton
+  (menuClick)="toggleMenu()"
+>
+  <img
+    alt="DragSense Logo"
+    src="images/logo/dragsense-logo.png"
+    fdbToolHeaderLogo
+  />
+  @for (action of actions; track action; let index = $index) {
+    <ng-template
+      fdbToolHeaderAction
+      [forceVisibility]="action.forceVisibility"
+      let-isInNavigationMenu="hidden"
     >
-      <img
-        alt="dragsense-logo"
-        class="inline-block"
-        style="width: 50px"
-        src="images/logo/dragsense-logo.png"
-      />
-      <b class="">DragSense</b>
-    </div>
-
-    <div ngProjectAs="nav-end">
-      <div class="flex items-center space-x-4">
+      @if (!isInNavigationMenu) {
         <button
-          size="small"
-     
-          aria-label="Switch Theme"
-          (click)="onToggleTheme()"
-          severity="secondary"
-        ></button>
+          fd-button
+          fdbToolHeaderActionButton
+          [glyph]="action.glyph"
+          [label]="action.label"
+          (click)="action.clickCallback()"
+        >
+          @if (action.hasBadge) {
+            <fd-button-badge />
+          }
+        </button>
+      } @else {
+        <fdb-navigation-menu-item
+          (fdkClicked)="action.clickCallback()"
+          [glyph]="action.glyph"
+          [label]="action.label"
+        />
+      }
+    </ng-template>
+  }
 
-        <div class="card flex justify-center">
-          <button
-            icon="pi pi-user"
-            size="small"
-          ></button>
-        </div>
-      </div>
-    </div>
-  </app-menu>
-</nav>
+  <fd-avatar
+    fdbToolHeaderUser
+    [fdMenuTrigger]="userMenu"
+    role="button"
+    [circle]="true"
+    glyph="user ? account : null"
+    [label]="user?.lastname"
+    size="xs"
+    [clickable]="true"
+  ></fd-avatar>
+  <fd-menu #userMenu>
+    <li class="p-2">
+      <h6>
+        Hello, <strong>{{ user?.lastname }}</strong>
+      </h6>
+    </li>
+    <li fd-menu-item>
+      <a fd-menu-interactive (click)="signOut()">
+        <fd-menu-addon glyph="system-exit-2"></fd-menu-addon>
+        <span fd-menu-title> Log out </span>
+      </a>
+    </li>
+  </fd-menu>
+
+  <fdb-tool-header-product-switch>
+    <app-menu />
+  </fdb-tool-header-product-switch>
+</fdb-tool-header>
+
+<ng-template
+  [fdDialogTemplate]
+  let-dialog
+  let-dialogConfig="dialogConfig"
+  #confirmationDialog
+>
+  <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+    <fd-dialog-body>
+
+      <app-profile [dialog]="dialog"/>
+
+    </fd-dialog-body>
+  </fd-dialog>
+</ng-template>

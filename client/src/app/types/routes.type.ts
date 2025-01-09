@@ -15,6 +15,7 @@ export interface RoutesType {
   admin: {
     base: string;
     dashboard: string;
+    profile: string;
     project: {
       base: string;
       overview: string;

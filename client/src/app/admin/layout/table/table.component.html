@@ -1,0 +1,54 @@
+<fd-busy-indicator [loading]="loading" [block]="true" size="m">
+  <fd-toolbar
+    aria-label="With Toolbar"
+    fdType="transparent"
+    [clearBorder]="true"
+  >
+    <h4 fd-title>Records</h4>
+    <fd-toolbar-spacer></fd-toolbar-spacer>
+    <fd-input-group
+      glyph="decline"
+      placeholder="Search"
+      [disabled]="false"
+      [button]="true"
+    >
+    </fd-input-group>
+  </fd-toolbar>
+
+  <table fd-table>
+    <thead fd-table-header>
+      <tr fd-table-row>
+        <th fd-table-cell *ngFor="let col of columns">{{ col.header }}</th>
+        <th fd-table-cell *ngIf="actions.length > 0">Actions</th>
+      </tr>
+    </thead>
+    <tbody fd-table-body>
+      <tr fd-table-row *ngFor="let row of data">
+        <td fd-table-cell *ngFor="let col of columns" class="prose">
+          <span *ngIf="!col.onClick">{{ row[col.field] }}</span>
+          <a
+            *ngIf="col.onClick"
+            class="cursor-pointer"
+            (click)="col.onClick(row)"
+            >{{ row[col.field] }}</a
+          >
+        </td>
+        <td fd-table-cell *ngIf="actions.length > 0">
+          <button
+            *ngFor="let action of actions"
+            fd-button
+            [label]="action.button.label ?? ''"
+            [glyph]="action.button.icon"
+            [fdType]="action.button.type ?? 'ghost'"
+            (click)="action.command(row)"
+          >
+            <i [class]="action.button.icon"></i>
+          </button>
+        </td>
+      </tr>
+      <tr fd-table-row *ngIf="data.length === 0">
+        <td fd-table-cell [noData]="true">No Record Found!</td>
+      </tr>
+    </tbody>
+  </table>
+</fd-busy-indicator>

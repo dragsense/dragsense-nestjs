@@ -17,7 +17,7 @@ export const authRoutes: Routes = [
     loadComponent: () =>
       import('./forgot/forgot.component').then((m) => m.ForgotComponent),
   },
-  {
+  { 
     path: ROUTES.auth.reset,
     loadComponent: () =>
       import('./reset/reset.component').then((m) => m.ResetComponent),

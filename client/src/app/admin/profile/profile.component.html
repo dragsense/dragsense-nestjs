@@ -1,0 +1,80 @@
+<ng-template #headerTemplate>
+  <div fd-action-bar>
+    <div fd-action-bar-header>
+      <div fd-action-bar-title>User Profile</div>
+      <div fd-action-bar-actions>
+        <button
+          fd-button
+          (click)="dialog.dismiss('Cancel')"
+          label="Close"
+          [disabled]="isSaving"
+        ></button>
+
+        <fd-busy-indicator
+          [loading]="isSaving"
+          size="s"
+          aria-labelledby="fd-busy-indicator-submit"
+          title="Inline Wrapper"
+        >
+          <button
+            fd-button
+            fdType="emphasized"
+            [disabled]="isSaving"
+            (click)="saveProfile()"
+          >
+            <span *ngIf="!isSaving">Save</span>
+            <span *ngIf="isSaving" class="spinner">Saving...</span>
+          </button>
+        </fd-busy-indicator>
+      </div>
+    </div>
+    <p fd-action-bar-description>Update your profile information here.</p>
+  </div>
+</ng-template>
+
+<ng-template #footerTemplate>
+  <div fd-bar barDesign="footer">
+    <div fd-bar-left>
+      <fdp-message-popover
+        [wrapper]="messagePopoverWrapper"
+      ></fdp-message-popover>
+    </div>
+    <div fd-bar-right>
+      <fd-button-bar
+        label="Cancel"
+        [disabled]="isSaving"
+        (click)="dialog.dismiss('Cancel')"
+      ></fd-button-bar>
+
+      <fd-button-bar [disabled]="isSaving" (click)="saveProfile()">
+        <span *ngIf="!isSaving">Save</span>
+        <span *ngIf="isSaving" class="spinner">Saving...</span>
+      </fd-button-bar>
+    </div>
+  </div>
+</ng-template>
+
+<app-main [headerTemplate]="headerTemplate" [footerTemplate]="footerTemplate">
+  <div class="my-4" *ngIf="submitError">
+    <fd-message-strip [type]="'error'" [dismissible]="true">
+      {{ submitError }}
+    </fd-message-strip>
+  </div>
+
+  <div class="my-4" *ngIf="submitSuccess">
+    <fd-message-strip [type]="'success'" [dismissible]="true">
+      {{ submitSuccess }}
+    </fd-message-strip>
+  </div>
+
+  <fdp-message-popover-form-wrapper #messagePopoverWrapper>
+    <fd-busy-indicator
+      [loading]="isLoading"
+      ariaLabel="Loading"
+      title="Please Wait"
+      class="w-full h-full"
+    >
+      <fdp-settings-generator [settings]="schema"></fdp-settings-generator>
+    </fd-busy-indicator>
+  </fdp-message-popover-form-wrapper>
+</app-main>

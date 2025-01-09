@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeService } from '@app/theme.service';
+import { AppThemeService } from '@app/theme.service';
 import { NgClass, NgFor } from '@angular/common';
 import { AuthService } from '../auth.service';
-import { ButtonComponent } from '@components/button/button.component';
 
 @Component({
   selector: 'auth-layout',
   imports: [
     NgFor,
-    NgClass,
-    ButtonComponent
+    NgClass
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
@@ -20,7 +18,7 @@ export class LayoutComponent implements OnInit {
   isDarkMode: boolean = false;
   socials = [
     {
-      iconClasse: 'pi-youtube',
+      svg: 'pi-youtube',
       url: 'https://www.youtube.com/@drag_sense',
       label: 'youtube',
     },
@@ -36,7 +34,7 @@ export class LayoutComponent implements OnInit {
     },
   ];
 
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: AppThemeService) {}
 
   ngOnInit() {
     this.isDarkMode = this.themeService.getDarkModeStatus();

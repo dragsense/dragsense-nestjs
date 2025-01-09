@@ -35,7 +35,9 @@ export class RouteService {
 
     switch (type) {
       case AdminRouteType.Dashboard:
-        return `/${adminBase.base}`;
+        return `/${adminBase.base}/${adminBase.dashboard}`;
+      case AdminRouteType.Profile:
+        return `/${adminBase.base}/${adminBase.profile}`;
       case AdminRouteType.Projects:
         return `/${adminBase.base}/${adminBase.projects.base}`;
       case AdminRouteType.Project:
@@ -65,7 +67,7 @@ export class RouteService {
 
     switch (type) {
       case ProjectRouteType.Overview:
-        return `${projectPath}`;
+        return `${projectPath}/${projectBase.overview}`;
       case ProjectRouteType.PageList:
         return `${projectPath}/${projectBase.pages.base}`;
       case ProjectRouteType.PageSingle:

@@ -51,20 +51,14 @@ export class ListComponent {
       {
         button: {
           icon: 'pi pi-pencil',
-          severity: 'secondary',
-          size: 'small',
-          text: true,
         },
-        onClick: (row: any) => this.onEditPage(row),
+        command: (row: any) => this.onEditPage(row),
       },
       {
         button: {
           icon: 'pi pi-trash',
-          severity: 'danger',
-          size: 'small',
-          text: true,
         },
-        onClick: (row: any) => this.onDeletePage(row),
+        command: (row: any) => this.onDeletePage(row),
       },
     ];
 

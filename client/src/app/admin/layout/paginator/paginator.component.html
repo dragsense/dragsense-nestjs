@@ -1,0 +1,13 @@
+<fd-pagination
+  [totalItems]="totalItems"
+  [displayTextTemplate]="customDisplayTextTemplate"
+  [itemsPerPage]="itemsPerPage"
+  [currentPage]="currentPage"
+  (pageChangeStart)="pageChanged($event)"
+  ariaLabel="Pagination with displayTextTemplate property"
+></fd-pagination>
+<ng-template #customDisplayTextTemplate let-showing="showing">
+  <span class="ml-2">From {{ showing.from }} to {{ showing.to }}. Total items
+  {{ showing.totalCount }}
+</span>
+</ng-template>

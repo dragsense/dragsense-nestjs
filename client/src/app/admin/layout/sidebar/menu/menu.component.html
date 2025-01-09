@@ -1,1 +1,147 @@
-
+<fdb-navigation
+  [state]="state"
+  [mode]="mode"
+  [style.width]="'fit-content'"
+  [style.height.%]="100"
+  class="project-menu"
+>
+  <a
+    fdb-navigation-link
+    *fdbNavigationLinkRef
+    [routerLink]="routerLinks.dashbaord"
+    glyph="home"
+    >Dashboard</a
+  >
+  <fdb-navigation-content-start>
+    <fdb-navigation-list-item group home>
+      <a
+        fdb-navigation-link
+        *fdbNavigationLinkRef
+        [routerLink]="routerLinks.dashbaord"
+        glyph="home"
+        >Home</a
+      >
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          [routerLink]="routerLinks.projects"
+          glyph="it-system"
+          >Projects</a
+        >
+      </fdb-navigation-list-item>
+    </fdb-navigation-list-item>
+    <fdb-navigation-list-item group expanded>
+      <a fdb-navigation-link *fdbNavigationLinkRef
+      [routerLink]="project ? null : routerLinks.projects"
+      >{{
+        project ? project.name : 'Select a Project'
+      }}</a>
+      <ng-container *ngIf="project">
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="it-host"
+          [routerLink]="routerLinks.project.overview"
+          >Overview</a
+        >
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="documents"
+          [routerLink]="routerLinks.project.pages"
+          >Pages</a
+        >
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="document"
+          [routerLink]="routerLinks.project.components"
+          >Components</a
+        >
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="database"
+          [routerLink]="routerLinks.project.collections"
+          >Collections</a
+        >
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="form"
+          [routerLink]="routerLinks.project.form"
+          >Forms</a
+        >
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="picture"
+          [routerLink]="routerLinks.project.media"
+          >Media</a
+        >
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="palette"
+          [routerLink]="routerLinks.project.styles"
+          >Styles</a
+        >
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item group expanded>
+        <a fdb-navigation-link *fdbNavigationLinkRef>Code</a>
+        <fdb-navigation-list-item expanded>
+          <a
+            fdb-navigation-link
+            *fdbNavigationLinkRef
+            glyph="syntax"
+            [routerLink]="routerLinks.project.cssCode"
+            >Custom CSS</a
+          >
+        </fdb-navigation-list-item>
+        <fdb-navigation-list-item expanded>
+          <a
+            fdb-navigation-link
+            *fdbNavigationLinkRef
+            glyph="source-code"
+            [routerLink]="routerLinks.project.JsCode"
+            >JavaScript</a
+          >
+        </fdb-navigation-list-item>
+      </fdb-navigation-list-item>
+      <fdb-navigation-list-item expanded>
+        <a
+          fdb-navigation-link
+          *fdbNavigationLinkRef
+          glyph="settings"
+          [routerLink]="routerLinks.project.settings"
+          >Settings</a
+        >
+      </fdb-navigation-list-item>
+    </ng-container>
+    </fdb-navigation-list-item>
+  </fdb-navigation-content-start>
+  <fdb-navigation-content-end>
+    <fdb-navigation-list-item>
+      <a fdb-navigation-link *fdbNavigationLinkRef glyph="sys-help">Help</a>
+    </fdb-navigation-list-item>
+    <fdb-navigation-list-item>
+      <a fdb-navigation-link *fdbNavigationLinkRef glyph="learning-assistant"
+        >Toturials</a
+      >
+    </fdb-navigation-list-item>
+  </fdb-navigation-content-end>
+</fdb-navigation>
