@@ -1,0 +1,128 @@
+<ng-template #headerTemplate>
+  <div fd-action-bar>
+    <div fd-action-bar-header>
+      <div fd-action-bar-title>{{ team ? 'Edit' : 'New' }} Team</div>
+      <div fd-action-bar-actions>
+        <button
+          fd-button
+          label="Go To Teams"
+          glyph="arrow-left"
+          [routerLink]="teamsPath"
+          [disabled]="loading"
+        ></button>
+        @if (formCreated) {
+          <fd-busy-indicator
+            [loading]="loading"
+            size="s"
+            aria-labelledby="fd-busy-indicator-submit"
+            title="Inline Wrapper"
+          >
+            <button
+              fd-button
+              label="{{ team ? 'Update' : 'Save' }}"
+              fdType="emphasized"
+              glyph="save"
+              (click)="submitForm()"
+              [disabled]="loading"
+            ></button>
+          </fd-busy-indicator>
+        }
+      </div>
+    </div>
+    <p fd-action-bar-description>
+      {{ team ? 'Update' : 'Create' }} your team and add members.
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #footerTemplate>
+  <div fd-bar barDesign="footer">
+    <div fd-bar-right>
+      <fd-button-bar
+        label="{{ team ? 'Update' : 'Save' }}"
+        (click)="submitForm()"
+        [disabled]="loading"
+      >
+      </fd-button-bar>
+    </div>
+  </div>
+</ng-template>
+
+<div class="my-4" *ngIf="errorMessage">
+  <fd-message-strip [type]="'error'" [dismissible]="false">
+    {{ errorMessage }}
+  </fd-message-strip>
+</div>
+
+<div class="my-4" *ngIf="successMessage">
+  <fd-message-strip [type]="'success'" [dismissible]="false">
+    {{ successMessage }}
+  </fd-message-strip>
+</div>
+
+<fdp-form-generator
+  [formItems]="teamQuestions"
+  (formSubmitted)="onFormSubmitted($event)"
+  (formCreated)="onFormCreated()"
+>
+</fdp-form-generator>
+
+<ul fd-list [byline]="true">
+  <li fd-list-item>
+    <span fd-list-thumbnail><fd-icon glyph="activate"></fd-icon></span>
+    <div fd-list-content>
+      <div fd-list-title>Title</div>
+      <div fd-list-byline>Byline Text</div>
+    </div>
+    <button
+      fd-button
+      fdType="transparent"
+      glyph="edit"
+      (click)="$event.stopPropagation()"
+      title="Edit"
+    ></button>
+    <button
+      fd-button
+      fdType="transparent"
+      glyph="decline"
+      (click)="$event.stopPropagation()"
+      title="Decline"
+    ></button>
+  </li>
+</ul>
+
+<ng-template
+  [fdDialogTemplate]
+  let-dialog
+  let-dialogConfig="dialogConfig"
+  #confirmationDialog
+>
+  <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+    <fd-dialog-header>
+      <h1 id="fd-dialog-header-10" fd-title>The History of Pineapple</h1>
+    </fd-dialog-header>
+
+    <fd-dialog-body> Hello </fd-dialog-body>
+
+    <fd-dialog-footer>
+      <fd-button-bar
+        fdType="emphasized"
+        label="Interested"
+        (click)="dialog.close('Continue')"
+        ariaLabel="Interested Emphasized"
+      ></fd-button-bar>
+
+      <fd-button-bar
+        label="Cancel"
+        (click)="dialog.dismiss('Cancel')"
+        ariaLabel="Cancel"
+      ></fd-button-bar>
+    </fd-dialog-footer>
+  </fd-dialog>
+</ng-template>
+
+<button
+  fd-button
+  label="Open from Template"
+  (click)="openDialog(confirmationDialog)"
+></button>

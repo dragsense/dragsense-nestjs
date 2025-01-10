@@ -10,7 +10,7 @@ import { JwtStrategy } from './passport-strategies/jwt.strategy';
 import { GithubStrategy } from './passport-strategies/github.strategy';
 import { GoogleStrategy } from './passport-strategies/google.strategy';
 import { LocalStrategy } from './passport-strategies/local.strategy';
-import { RevokedToken } from 'src/entities/revoked_tokens.entity';
+import { RevokedToken } from 'src/entities/revoked-tokens.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EmailService } from 'src/shared/email/email.service';
 
@@ -24,7 +24,7 @@ import { EmailService } from 'src/shared/email/email.service';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '1h' },
+        signOptions: { expiresIn: '24h' },
       }),
     }),
   ],

@@ -50,7 +50,13 @@ export interface ButtonWithText extends ButtonBase {
   icon?: string;
 }
 
+export interface ActionPopOver {
+  title: string;
+  subHeading: string;
+}
+
 export interface Action {
   button: ButtonWithText | ButtonWithIcon;
+  popover?: ActionPopOver;
   command: (row: any) => void;
 }

@@ -1,57 +1,63 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { FormsModule, Validators } from '@angular/forms';
-import { RouteService } from '../../../routes.service';
-import { PlatformType, Project } from '../interfaces/project.interface';
-import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { SelectModule } from '@fundamental-ngx/core/select';
-import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
-
-import { ProjectService } from '../project.service';
-import { NgIf } from '@angular/common';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
-  BarComponent,
-  BarRightDirective,
-  ButtonBarComponent,
-} from '@fundamental-ngx/core/bar';
+  ChangeDetectorRef,
+  Component,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouteService } from '@app/routes.service';
+import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { ListModule } from '@fundamental-ngx/core/list';
 
+import {
+  DialogBodyComponent,
+  DialogComponent,
+  DialogFooterComponent,
+  DialogHeaderComponent,
+  DialogService,
+} from '@fundamental-ngx/core/dialog';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
   DynamicFormItem,
   DynamicFormValue,
   FormGeneratorComponent,
+  
   FormGeneratorService,
   PlatformFormGeneratorModule,
 } from '@fundamental-ngx/platform/form';
-
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-
-import { catchError, finalize, of } from 'rxjs';
-import { CustomTextareaComponent } from '@components/textarea/textarea.component';
+import { TeamsService } from '../teams.service';
+import { catchError, finalize } from 'rxjs';
+import { Team } from '../interfaces/team.interface';
+import { Validators } from '@angular/forms';
 import { HeperService } from '@app/heper.service';
 
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
+import { NgIf } from '@angular/common';
+
+
+
 @Component({
-  selector: 'app-project',
+  selector: 'teams-single',
   imports: [
-    FormsModule,
     RouterLink,
-    NgIf,
-    ActionBarModule,
+    ListModule,
+    IconComponent,
     ButtonComponent,
-    BarComponent,
-    ButtonBarComponent,
-    BarRightDirective,
-    FormModule,
-    SelectModule,
-    RadioButtonComponent,
-    PlatformButtonModule,
-    FormGeneratorComponent,
-    PlatformFormGeneratorModule,
-    MessageStripModule,
+    ActionBarModule,
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    BarModule,
+    TitleComponent,
     BusyIndicatorModule,
+    MessageStripModule,
+    NgIf,
+    PlatformFormGeneratorModule
   ],
   templateUrl: './single.component.html',
   styleUrl: './single.component.scss',
@@ -62,46 +68,44 @@ export class SingleComponent {
 
   @ViewChild(FormGeneratorComponent) formGenerator!: FormGeneratorComponent;
 
+  teamsPath!: string;
+
   loading = false;
 
   formCreated = false;
 
-  project: Project | null = null;
-
   questions!: DynamicFormItem[];
+  teamQuestions!: DynamicFormItem[];
 
-  projectsPath!: string;
+  team: Team | null = null;
 
   successMessage: string = '';
   errorMessage: string = '';
 
   constructor(
     private routeService: RouteService,
+    private _dialogService: DialogService,
+    private _cdr: ChangeDetectorRef,
+    private teamService: TeamsService,
     private route: ActivatedRoute,
-    private projectService: ProjectService,
-    private readonly _formGeneratorService: FormGeneratorService,
-    private readonly helperService: HeperService,
-  ) {
-    this._formGeneratorService.addComponent(CustomTextareaComponent, [
-      'ds-textarea',
-    ]);
-  }
+    private helperService: HeperService,
+  ) {}
 
   async ngOnInit() {
-    this.projectsPath = this.routeService.getProjectsPath();
+    this.teamsPath = this.routeService.getTeamsPath();
 
-    const projectId = this.route.snapshot.paramMap.get('id');
+    const teamId = this.route.snapshot.paramMap.get('id');
 
-    if (projectId) this.fetchProject(parseInt(projectId));
-    else this.dyanmicProjectForm();
+    if (teamId) this.fetchTeam(parseInt(teamId));
+    else this.dyanmicTeamForm();
   }
 
-  private fetchProject(projectId: number) {
+  private fetchTeam(teamId: number) {
     this.loading = true;
     this.errorMessage = '';
 
-    this.projectService
-      .get(projectId)
+    this.teamService
+      .get(teamId)
       .pipe(
         catchError((error) => {
           this.errorMessage = 'Failed to fetch. Please try again.';
@@ -113,22 +117,22 @@ export class SingleComponent {
         }),
       )
       .subscribe((response) => {
-        this.project = response;
-        this.dyanmicProjectForm();
+        this.team = response;
+        this.dyanmicTeamForm();
       });
   }
 
-  dyanmicProjectForm(): void {
+  /*   dyanmicMemberForm(): void {
     this.questions = [
       {
-        name: 'indentity',
-        message: 'Project Identity',
+        name: 'invitation',
+        message: 'Invite Memnber',
         items: [
           {
             type: 'input',
             name: 'name',
             message: 'Name',
-            default: this.project?.name,
+            default: this.team?.name,
             placeholder: 'Please enter project name',
             validators: [
               Validators.required,
@@ -144,9 +148,9 @@ export class SingleComponent {
           },
           {
             type: 'input',
-            name: 'identifier',
-            message: 'Identifier',
-            default: this.project?.identifier,
+            name: 'email',
+            message: 'Email',
+            default: this.team?.email,
             placeholder: 'Please enter project identifier',
             validators: [
               Validators.required,
@@ -159,68 +163,45 @@ export class SingleComponent {
           },
         ],
       },
+    ];
+  } */
+
+  dyanmicTeamForm(): void {
+    this.teamQuestions = [
       {
-        name: 'detail',
-        message: 'Project Description',
+        name: 'team',
+        message: 'Team Info',
         items: [
           {
-            type: 'ds-textarea',
+            type: 'input',
+            name: 'name',
+            message: 'Name',
+            default: this.team?.name,
+            placeholder: 'Please enter team name',
+            validators: [
+              Validators.required,
+              Validators.max(100),
+              Validators.min(3),
+            ],
+            guiOptions: {
+              fieldColumnLayout: { XL: 6, L: 6 },
+              additionalData: {
+                rows: '10',
+              },
+            },
+          },
+          {
+            type: 'textarea',
             name: 'desc',
             message: 'Description',
-            default: this.project?.desc,
-            placeholder: 'Please enter project description',
+            default: this.team?.desc,
+            placeholder: 'Please enter team description',
             validators: [Validators.max(1024)],
             guiOptions: {
               column: 1,
             },
           },
         ],
-      },
-      {
-        name: 'serverInfo',
-        message: 'Server Information',
-        items: [
-          {
-            type: 'input',
-            name: 'serverUrl',
-            message: 'Server URL',
-            default: this.project?.serverUrl,
-            placeholder: 'Please enter api server url',
-            validators: [Validators.required],
-          },
-          {
-            type: 'input',
-            name: 'apiPrefix',
-            message: 'API Prefix',
-            default: this.project?.apiPrefix || 'api',
-            placeholder: 'Please enter api prefix',
-            validators: [
-              Validators.required,
-              Validators.max(30),
-              Validators.min(3),
-            ],
-            guiOptions: {
-              fieldColumnLayout: { XL: 3, L: 3 },
-            },
-          },
-        ],
-      },
-      {
-        type: 'list',
-        name: 'apiVer',
-        message: 'API Version',
-        validators: [Validators.required],
-        default: this.project?.apiVer || 'v1',
-        choices: () =>
-          of([
-            {
-              label: 'Version 1',
-              value: 'v1',
-            },
-          ]),
-        guiOptions: {
-          fieldColumnLayout: { XL: 3, L: 3 },
-        },
       },
     ];
   }
@@ -230,7 +211,7 @@ export class SingleComponent {
   }
 
   private create(values: any) {
-    this.projectService
+    this.teamService
       .create(values)
       .pipe(
         catchError((error) => {
@@ -255,13 +236,13 @@ export class SingleComponent {
         }),
       )
       .subscribe((response) => {
-        this.project = response.project;
-        this.successMessage = 'Project Created successfuly.';
+        this.team = response.project;
+        this.successMessage = 'Team Created successfuly.';
       });
   }
 
   private update(id: number, values: any) {
-    this.projectService
+    this.teamService
       .update(id, values)
       .pipe(
         catchError((error) => {
@@ -286,23 +267,41 @@ export class SingleComponent {
         }),
       )
       .subscribe((response) => {
-        this.project = response.project;
-        this.successMessage = 'Project Updated successfuly.';
+        this.team = response.project;
+        this.successMessage = 'Team Updated successfuly.';
       });
   }
 
   async onFormSubmitted(value: DynamicFormValue): Promise<void> {
     this.loading = true;
 
-    const values = this.helperService.getLastKeys(value);
     this.errorMessage = '';
     this.successMessage = '';
 
-    if (this.project) this.update(this.project.id, values);
+    const values = this.helperService.getLastKeys(value);
+
+    if (this.team) this.update(this.team.id, values);
     else this.create(values);
   }
 
   submitForm(): void {
     this.formGenerator.submit();
+  }
+
+  openDialog(dialog: TemplateRef<any>): void {
+    const dialogRef = this._dialogService.open(dialog, {
+      responsivePadding: true,
+      focusTrapped: true,
+      verticalPadding: true,
+    });
+
+    dialogRef.afterClosed.subscribe(
+      (result) => {
+        this._cdr.detectChanges();
+      },
+      (error) => {
+        this._cdr.detectChanges();
+      },
+    );
   }
 }

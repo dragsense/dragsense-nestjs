@@ -1,20 +1,22 @@
 <ng-template #headerTemplate>
   <div fd-action-bar>
     <div fd-action-bar-header>
-      <div fd-action-bar-title>Projects</div>
+      <div fd-action-bar-title>Teams</div>
       <div fd-action-bar-actions>
+
+    
+
         <button
           fd-button
-          label="Create New"
+          label="Add Team"
           glyph="add"
-          [routerLink]="singlePath"
           fdType="emphasized"
+          [routerLink]="singlePath"
         ></button>
+
       </div>
     </div>
-    <p fd-action-bar-description>
-      Connect your projects to your data and website.
-    </p>
+    <p fd-action-bar-description>Manage your teams easily.</p>
   </div>
 </ng-template>
 
@@ -26,14 +28,17 @@
   </div>
 </ng-template>
 
+
+
 <div class="my-4" *ngIf="errorMessage">
   <fd-message-strip [type]="'error'" [dismissible]="false">
     {{ errorMessage }}
   </fd-message-strip>
 </div>
 
+
 <app-table
-  [data]="projects"
+  [data]="teams"
   [columns]="columns"
   [actions]="actions"
   [loading]="loading"

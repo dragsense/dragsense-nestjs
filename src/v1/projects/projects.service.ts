@@ -76,10 +76,10 @@ export class ProjectsService {
 
   async update(
     id: number,
-    updateProjectrDto: UpdateProjectDto,
+    updateProjectDto: UpdateProjectDto,
   ): Promise<Project> {
     const { name, desc, serverUrl, apiPrefix, apiVer, identifier } =
-      updateProjectrDto;
+      updateProjectDto;
 
     const project = await this.findOneByID(id);
     if (!project) {
@@ -103,6 +103,6 @@ export class ProjectsService {
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     }
 
-    await this.projectRepository.delete(project);
+    await this.projectRepository.remove(project);
   }
 }

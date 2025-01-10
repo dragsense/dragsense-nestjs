@@ -25,4 +25,11 @@ export const API: ApiEndpointsType = {
     update: getApiUrl('/projects/update'),
     delete: getApiUrl('/projects/delete'),
   },
+  teams: {
+    base: getApiUrl('/teams'),
+    list: getApiUrl('/teams/list'),
+    create: getApiUrl('/teams/create'),
+    update: getApiUrl('/teams/update'),
+    delete: getApiUrl('/teams/delete'),
+  },
 };

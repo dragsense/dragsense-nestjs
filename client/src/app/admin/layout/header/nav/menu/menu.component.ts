@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { RouteService } from '../../../../../routes.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
+import {
+  ProductSwitchBodyComponent,
+  ProductSwitchItem,
+} from '@fundamental-ngx/core/product-switch';
 
 @Component({
   selector: 'app-menu',
@@ -14,57 +17,55 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
 })
 export class AppMenuComponent implements OnInit {
   items: any[] | undefined;
-  
-  constructor(private routerService: RouteService) {}
 
-  ngOnInit() {
-   /*  this.items = [
-      {
-        label: 'Projects',
-        icon: 'pi pi-server',
-        route: this.routerService.getProjectsPath(),
-      },
-      {
-        label: 'Teams',
-        icon: 'pi pi-users',
-        route: this.routerService.getAdminPath(),
-      },
-      {
-        label: 'Themes',
-        icon: 'pi pi-palette',
-        route: this.routerService.getAdminPath(),
-      },
-      {
-        label: 'Apps',
-        icon: 'pi pi-shop',
-        route: this.routerService.getAdminPath(),
-      },
-    ]; */
-  }
+  constructor(
+    private routerService: RouteService,
+    private router: Router,
+  ) {}
+
+  ngOnInit() {}
 
   itemSwitcher: ProductSwitchItem[] = [
     {
-        title: 'Projects',
-        subtitle: 'All Projects',
-        icon: 'it-system',
-     
+      title: 'Projects',
+      subtitle: 'Your Projects',
+      icon: 'it-system',
+      selected: false,
+      callback: (event: MouseEvent) => {
+        this.selectItem('Projects');
+        const projectsPath = this.routerService.getProjectsPath();
+        this.router.navigate([`${projectsPath}`]);
+      },
     },
     {
-        title: 'Teams',
-        subtitle: 'All Teams',
-        icon: 'collaborate',
+      title: 'Teams',
+      subtitle: 'Your Teams',
+      icon: 'collaborate',
+      selected: false,
+      callback: (event: MouseEvent) => {
+        this.selectItem('Teams');
+        const teamsPath = this.routerService.getTeamsPath();
+        this.router.navigate([`${teamsPath}`]);
+      },
     },
     {
-        title: 'Themes',
-        subtitle: 'All Themes',
-        icon: 'palette'
+      title: 'Themes',
+      subtitle: 'Public Themes',
+      icon: 'palette',
+      selected: false,
     },
     {
-        title: 'Apps',
-        icon: 'application-service',
-        subtitle: 'Plugins/Widgets',
-        font: "SAP-icons-TNT"
+      title: 'Apps',
+      icon: 'application-service',
+      subtitle: 'Plugins/Widgets',
+      font: 'SAP-icons-TNT',
+      selected: false,
     },
-   
-];
+  ];
+
+  selectItem(title: string): void {
+    this.itemSwitcher.forEach((item) => {
+      item.selected = item.title === title;
+    });
+  }
 }

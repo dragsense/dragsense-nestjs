@@ -85,8 +85,12 @@ export class ListComponent implements OnInit {
       },
       {
         button: {
-          icon: 'delete',
-          type: 'negative',
+          type: 'transparent',
+          label: 'delete',
+        },
+        popover: {
+          title: 'Delete Project',
+          subHeading: 'This action cannot be undone. Do you want to delete this project?',
         },
         command: (project) => this.onDeleteProject(project),
       },

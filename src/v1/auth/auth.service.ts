@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { RevokedToken } from '../../entities/revoked_tokens.entity';
+import { RevokedToken } from '../../entities/revoked-tokens.entity';
 import { EmailService } from 'src/shared/email/email.service';
 import { ConfigService } from '@nestjs/config';
 import { User } from 'src/entities/user.entity';

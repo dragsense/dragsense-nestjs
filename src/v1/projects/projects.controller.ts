@@ -54,9 +54,9 @@ export class ProjectsController {
   @Post('update/:id')
   async udpate(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateProjectrDto: UpdateProjectDto,
+    @Body() updateProjectDto: UpdateProjectDto,
   ) {
-    const project = await this.projectsService.update(id, updateProjectrDto);
+    const project = await this.projectsService.update(id, updateProjectDto);
     return { message: 'Project updated successfully', project };
   }
 

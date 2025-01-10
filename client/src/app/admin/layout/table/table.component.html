@@ -11,8 +11,7 @@
       placeholder="Search"
       [disabled]="false"
       [button]="true"
-    >
-    </fd-input-group>
+    ></fd-input-group>
   </fd-toolbar>
 
   <table fd-table>
@@ -24,30 +23,81 @@
     </thead>
     <tbody fd-table-body>
       <tr fd-table-row *ngFor="let row of data">
-        <td fd-table-cell *ngFor="let col of columns" class="prose">
+        <td fd-table-cell *ngFor="let col of columns">
           <span *ngIf="!col.onClick">{{ row[col.field] }}</span>
           <a
             *ngIf="col.onClick"
-            class="cursor-pointer"
+            class="cursor-pointer underline"
             (click)="col.onClick(row)"
-            >{{ row[col.field] }}</a
           >
+            {{ row[col.field] }}
+          </a>
         </td>
         <td fd-table-cell *ngIf="actions.length > 0">
-          <button
-            *ngFor="let action of actions"
-            fd-button
-            [label]="action.button.label ?? ''"
-            [glyph]="action.button.icon"
-            [fdType]="action.button.type ?? 'ghost'"
-            (click)="action.command(row)"
-          >
-            <i [class]="action.button.icon"></i>
-          </button>
+          <ng-container *ngFor="let action of actions">
+            <ng-container *ngIf="action.popover; else directButton">
+         
+              <fd-popover [focusTrapped]="true" [focusAutoCapture]="true">
+                <fd-popover-control>
+                  <button
+                    fd-button
+                    [label]="action.button.label ?? ''"
+                    [glyph]="action.button.icon"
+                    [fdType]="action.button.type ?? 'ghost'"
+                  ></button>
+                </fd-popover-control>
+                <fd-popover-body>
+                  <div fd-popover-body-header>
+                    <div fd-bar barDesign="header-with-subheader">
+                      <div fd-bar-left>
+                        <fd-bar-element>
+                          <h5 fd-title>{{ action.popover.title }}</h5>
+                        </fd-bar-element>
+                      </div>
+                    </div>
+                    <div fd-bar barDesign="subheader">
+                      <div fd-bar-middle>
+                        <fd-bar-element [fullWidth]="true">{{
+                          action.popover.subHeading
+                        }}</fd-bar-element>
+                      </div>
+                    </div>
+                  </div>
+                  <div fd-popover-body-footer>
+                    <div fd-bar barDesign="footer">
+                      <div fd-bar-right>
+                        <fd-button-bar
+                          label="Confirm"
+                          fdType="emphasized"
+                          (click)="action.command(row)"
+                        ></fd-button-bar>
+                      </div>
+                    </div>
+                  </div>
+                </fd-popover-body>
+              </fd-popover>
+            </ng-container>
+            <ng-template #directButton>
+           
+              <button
+                fd-button
+                [label]="action.button.label ?? ''"
+                [glyph]="action.button.icon"
+                [fdType]="action.button.type ?? 'ghost'"
+                (click)="action.command(row)"
+              ></button>
+            </ng-template>
+          </ng-container>
         </td>
       </tr>
       <tr fd-table-row *ngIf="data.length === 0">
-        <td fd-table-cell [noData]="true">No Record Found!</td>
+        <td
+          fd-table-cell
+          [noData]="true"
+          [colSpan]="columns.length + (actions.length > 0 ? 1 : 0)"
+        >
+          No Record Found!
+        </td>
       </tr>
     </tbody>
   </table>

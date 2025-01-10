@@ -11,9 +11,30 @@ import { TableModule } from '@fundamental-ngx/core/table';
 import { Column, Action } from './interfaces/table.interface';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import {
+  ToolbarComponent,
+  ToolbarItemDirective,
+  ToolbarSpacerDirective,
+} from '@fundamental-ngx/core/toolbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+  PopoverBodyComponent,
+  PopoverBodyDirective,
+  PopoverBodyFooterDirective,
+  PopoverBodyHeaderDirective,
+  PopoverComponent,
+  PopoverControlComponent,
+  PopoverModule,
+} from '@fundamental-ngx/core/popover';
+import {
+  BarComponent,
+  BarElementDirective,
+  BarLeftDirective,
+  BarMiddleDirective,
+  BarRightDirective,
+  ButtonBarComponent,
+} from '@fundamental-ngx/core/bar';
 
 @Component({
   selector: 'app-table',
@@ -25,10 +46,24 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
     ToolbarItemDirective,
     ToolbarSpacerDirective,
     TitleComponent,
+
     TableModule,
     BusyIndicatorComponent,
     InputGroupModule,
-    ButtonComponent
+
+    PopoverComponent,
+    PopoverControlComponent,
+    PopoverBodyComponent,
+    PopoverBodyHeaderDirective,
+    BarComponent,
+    ButtonBarComponent,
+    BarElementDirective,
+    BarLeftDirective,
+    BarMiddleDirective,
+    BarRightDirective,
+    ButtonComponent,
+    TitleComponent,
+    PopoverBodyFooterDirective,
   ],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
@@ -43,7 +78,6 @@ export class TableComponent {
   @Output() actionTriggered = new EventEmitter<{ action: Action; row: any }>();
 
   onActionClick(action: Action, row: any) {
-   
     this.actionTriggered.emit({ action, row });
   }
 }

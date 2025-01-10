@@ -21,4 +21,12 @@ export interface ApiEndpointsType {
     update: string;
     delete: string;
   };
+
+  teams: {
+    base: string;
+    list: string;
+    create: string;
+    update: string;
+    delete: string;
+  };
 }

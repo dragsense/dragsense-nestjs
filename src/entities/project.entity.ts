@@ -2,9 +2,7 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  JoinColumn,
   OneToMany,
-  ManyToOne,
 } from 'typeorm';
 import { UserProject } from './user-projects.entity';
 

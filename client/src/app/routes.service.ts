@@ -5,6 +5,7 @@ import {
   AdminRouteType,
   ProjectRouteType,
   ProjectsRouteType,
+  TeamsRouteType,
 } from './config/routes.config';
 
 @Injectable({
@@ -36,12 +37,13 @@ export class RouteService {
     switch (type) {
       case AdminRouteType.Dashboard:
         return `/${adminBase.base}/${adminBase.dashboard}`;
-      case AdminRouteType.Profile:
-        return `/${adminBase.base}/${adminBase.profile}`;
       case AdminRouteType.Projects:
         return `/${adminBase.base}/${adminBase.projects.base}`;
+      case AdminRouteType.Teams:
+        return `/${adminBase.base}/${adminBase.teams.base}`;
       case AdminRouteType.Project:
         return `/${adminBase.base}/${adminBase.project.base}`;
+
       default:
         return `/${adminBase.base}`;
     }
@@ -58,6 +60,20 @@ export class RouteService {
         return `${projectsPath}/${projectsBase.single}`;
       default:
         return projectsPath;
+    }
+  }
+
+  getTeamsPath(type?: TeamsRouteType): string {
+    const teamsPath = this.getAdminPath(AdminRouteType.Teams);
+    const teamsBase = ROUTES.admin.teams;
+
+    switch (type) {
+      case TeamsRouteType.List:
+        return `${teamsPath}`;
+      case TeamsRouteType.Single:
+        return `${teamsPath}/${teamsBase.single}`;
+      default:
+        return teamsPath;
     }
   }
 

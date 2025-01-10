@@ -48,7 +48,7 @@ export const ROUTES: RoutesType = {
     teams: {
       base: 'teams',
       list: 'list',
-      single: 'team',
+      single: 'single',
     },
     themes: {
       base: 'themes',
@@ -82,6 +82,11 @@ export enum AdminRouteType {
 
 export enum ProjectsRouteType {
   List = 'projects',
+  Single = 'single',
+}
+
+export enum TeamsRouteType {
+  List = 'teams',
   Single = 'single',
 }
 
